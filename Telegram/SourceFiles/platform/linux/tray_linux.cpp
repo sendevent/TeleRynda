@@ -134,8 +134,7 @@ bool IconGraphic::isRefreshNeeded() const {
 		|| _new.systemIcon.name() != _current.systemIcon.name()
 		|| (isCounterNeeded(_new)
 			? _new.muted != _current.muted
-				|| counterSlice(_new.counter) != counterSlice(
-						_current.counter)
+				|| (_new.counter > 0) != (_current.counter > 0)
 			: false);
 }
 
@@ -204,12 +203,11 @@ QIcon IconGraphic::trayIcon() {
 		}
 
 		result.addPixmap(Ui::PixmapFromImage(_new.counter > 0
-			? Window::WithSmallCounter(std::move(currentImageBack), {
-				.size = iconSize,
-				.count = _new.counter,
-				.bg = _new.muted ? st::trayCounterBgMute : st::trayCounterBg,
-				.fg = st::trayCounterFg,
-			}) : std::move(currentImageBack)));
+			? Window::WithBlueDot(
+				std::move(currentImageBack),
+				iconSize,
+				_new.muted ? st::trayCounterBgMute : st::trayCounterBg)
+			: std::move(currentImageBack)));
 	}
 
 	_trayIcon = result;
@@ -291,8 +289,8 @@ void Tray::createIcon() {
 		};
 
 		_icon = base::make_unique_q<QSystemTrayIcon>(nullptr);
-		_icon->setIcon(_iconGraphic->trayIcon());
-		_icon->setToolTip(AppName.utf16());
+		_icon->setIcon(_iconGraphic->trayIcon());		
+		_icon->setToolTip(composeTooltip());
 
 		using Reason = QSystemTrayIcon::ActivationReason;
 		base::qt_signal_producer(
@@ -326,6 +324,15 @@ void Tray::destroyIcon() {
 	_icon = nullptr;
 }
 
+QString Tray::composeTooltip() const
+{
+	const auto counter = Core::App().unreadBadge();
+	const auto tooltip = (counter > 0)
+		? QString::number(counter)
+		: QObject::tr("¯\\_(ツ)_/¯");
+	return tooltip;
+}
+
 void Tray::updateIcon() {
 	if (!_icon || !_iconGraphic) {
 		return;
@@ -335,6 +342,8 @@ void Tray::updateIcon() {
 	if (_iconGraphic->isRefreshNeeded()) {
 		_icon->setIcon(_iconGraphic->trayIcon());
 	}
+	
+	_icon->setToolTip(composeTooltip());
 }
 
 void Tray::createMenu() {

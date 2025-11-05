@@ -60,6 +60,7 @@ extern const char kOptionDisableTouchbar[];
 
 [[nodiscard]] QImage GenerateCounterLayer(CounterLayerArgs &&args);
 [[nodiscard]] QImage WithSmallCounter(QImage image, CounterLayerArgs &&args);
+[[nodiscard]] QImage WithBlueDot(QImage image, int size, style::color dotColor);
 
 class MainWindow : public Ui::RpWindow {
 public:

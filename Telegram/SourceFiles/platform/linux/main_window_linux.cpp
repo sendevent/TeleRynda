@@ -161,9 +161,15 @@ void MainWindow::updateWindowIcon() {
 }
 
 void MainWindow::updateUnityCounter() {
+	const auto counter = Core::App().unreadBadge();
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
-	qApp->setBadgeNumber(Core::App().unreadBadge());
-#else // Qt >= 6.6.0
+	// Modern Qt API - works with KDE Plasma, GNOME, and other modern desktops
+	qApp->setBadgeNumber(counter);
+#endif // Qt >= 6.6.0
+
+	// Also send Unity LauncherEntry signal for compatibility with older systems
+	// and as a fallback for desktops that might not fully support Qt's badge API yet
 	using namespace gi::repository;
 
 	static const auto djbStringHash = [](const std::string &string) {
@@ -178,13 +184,15 @@ void MainWindow::updateUnityCounter() {
 		+ QGuiApplication::desktopFileName().toStdString()
 		+ ".desktop";
 
-	const auto counterSlice = std::min(Core::App().unreadBadge(), 9999);
+	const auto counterSlice = std::min(counter, 9999);
 
 	auto connection = Gio::bus_get_sync(Gio::BusType::SESSION_, nullptr);
 	if (!connection) {
 		return;
 	}
 
+	// Send Unity LauncherEntry DBus signal
+	// This works with KDE Plasma (via compatibility layer), Unity, Budgie, etc.
 	connection.emit_signal(
 		{},
 		"/com/canonical/unity/launcherentry/"
@@ -201,10 +209,9 @@ void MainWindow::updateUnityCounter() {
 				GLib::Variant::new_dict_entry(
 					GLib::Variant::new_string("count-visible"),
 					GLib::Variant::new_variant(
-						GLib::Variant::new_boolean(counterSlice))),
+						GLib::Variant::new_boolean(counterSlice > 0))),
 			}),
 		}));
-#endif // Qt < 6.6.0
 }
 
 void MainWindow::createGlobalMenu() {

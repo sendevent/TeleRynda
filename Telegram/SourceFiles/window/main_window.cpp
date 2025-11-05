@@ -362,6 +362,28 @@ QImage WithSmallCounter(QImage image, CounterLayerArgs &&args) {
 	return image;
 }
 
+QImage WithBlueDot(QImage image, int size, style::color dotColor) {
+	// Draw a small blue dot in the bottom right corner
+	auto p = QPainter(&image);
+	auto hq = PainterHighQualityEnabler(p);
+
+	// Dot size is proportional to icon size (roughly 1/4 to 1/5 of icon)
+	const auto dotRadius = std::max(size / 6, 2);
+	const auto margin = std::max(size / 10, 1);
+
+	p.setBrush(dotColor);
+	p.setPen(Qt::NoPen);
+	p.drawEllipse(
+		QPoint(
+			size - margin - dotRadius,
+			size - margin - dotRadius),
+		dotRadius,
+		dotRadius);
+	p.end();
+
+	return image;
+}
+
 MainWindow::MainWindow(not_null<Controller*> controller)
 : _controller(controller)
 , _positionUpdatedTimer([=] { savePosition(); })

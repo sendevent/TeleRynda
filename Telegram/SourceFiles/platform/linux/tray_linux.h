@@ -69,6 +69,8 @@ private:
 
 	rpl::lifetime _actionsLifetime;
 	rpl::lifetime _lifetime;
+	
+	QString composeTooltip() const;
 
 };
 
