@@ -21,16 +21,16 @@
 	url = https://github.com/desktop-app/lib_base.git
 [submodule "Telegram/codegen"]
 	path = Telegram/codegen
-	url = https://github.com/AyuGram/codegen.git
+	url = git@github.com:sendevent/codegen.git
 [submodule "Telegram/lib_ui"]
 	path = Telegram/lib_ui
-	url = https://github.com/AyuGram/lib_ui.git
+	url = git@github.com:sendevent/lib_ui.git
 [submodule "Telegram/lib_lottie"]
 	path = Telegram/lib_lottie
 	url = https://github.com/desktop-app/lib_lottie.git
 [submodule "Telegram/lib_tl"]
 	path = Telegram/lib_tl
-	url = https://github.com/AyuGram/lib_tl.git
+	url = git@github.com:sendevent/lib_tl.git
 [submodule "Telegram/lib_spellcheck"]
 	path = Telegram/lib_spellcheck
 	url = https://github.com/desktop-app/lib_spellcheck
@@ -39,7 +39,7 @@
 	url = https://github.com/desktop-app/lib_storage.git
 [submodule "cmake"]
 	path = cmake
-	url = https://github.com/desktop-app/cmake_helpers.git
+	url = git@github.com:sendevent/cmake_helpers.git
 [submodule "Telegram/ThirdParty/expected"]
 	path = Telegram/ThirdParty/expected
 	url = https://github.com/TartanLlama/expected
@@ -93,4 +93,4 @@
 	url = https://github.com/flatpak/xdg-desktop-portal.git
 [submodule "Telegram/lib_icu"]
 	path = Telegram/lib_icu
-	url = https://github.com/AyuGram/lib_icu.git
+	url = git@github.com:sendevent/lib_icu.git
