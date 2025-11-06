@@ -630,8 +630,8 @@ int MainWindow::computeMinHeight() const {
 }
 
 void MainWindow::refreshTitleWidget() {
-	if (Ui::Platform::NativeWindowFrameSupported()
-		&& Core::App().settings().nativeWindowFrame()) {
+	// Force native KDE title bar on Linux
+	if (Ui::Platform::NativeWindowFrameSupported()) {
 		setNativeFrame(true);
 		if (Platform::NativeTitleRequiresShadow()) {
 			_titleShadow.create(this);
