@@ -105,10 +105,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/ui/utils/ayu_profile_values.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/ui/utils/rynda_profile_values.h"
+#include "rynda/utils/telegram_helpers.h"
 #include "ui/text/text_entity.h"
 
 
@@ -1345,7 +1345,7 @@ bool SetClickContext(
 }
 
 object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	auto result = object_ptr<Ui::VerticalLayout>(_wrap);
 	auto tracker = Ui::MultiSlideTracker();
@@ -1674,7 +1674,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 			auto idInfo = addInfoOneLine(
 				rpl::single(idLabel),
 				std::move(idDrawableText),
-				tr::ayu_ContextCopyID(tr::now)
+				tr::rynda_ContextCopyID(tr::now)
 			);
 
 			idInfo.text->setClickHandlerFilter([=](auto &&...)
@@ -1682,7 +1682,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 				const auto idText = IDString(user);
 				if (!idText.isEmpty()) {
 					QGuiApplication::clipboard()->setText(idText);
-					controller->showToast(tr::ayu_IDCopiedToast(tr::now));
+					controller->showToast(tr::rynda_IDCopiedToast(tr::now));
 				}
 				return false;
 			});
@@ -1809,7 +1809,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 			auto idInfo = addInfoOneLine(
 				idLabel,
 				std::move(idDrawableText),
-				tr::ayu_ContextCopyID(tr::now)
+				tr::rynda_ContextCopyID(tr::now)
 			);
 
 			idInfo.text->setClickHandlerFilter([=, peer = _peer](auto &&...)
@@ -1817,7 +1817,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 				const auto idText = IDString(peer);
 				if (!idText.isEmpty()) {
 					QGuiApplication::clipboard()->setText(idText);
-					controller->showToast(tr::ayu_IDCopiedToast(tr::now));
+					controller->showToast(tr::rynda_IDCopiedToast(tr::now));
 				}
 				return false;
 			});
@@ -1833,7 +1833,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 			auto idInfo = addInfoOneLine(
 				rpl::single(QString("ID")),
 				std::move(idDrawableText),
-				tr::ayu_ContextCopyID(tr::now)
+				tr::rynda_ContextCopyID(tr::now)
 			);
 
 			idInfo.text->setClickHandlerFilter([=, peer = _peer](auto &&...)
@@ -1841,7 +1841,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 				const auto idText = IDString(peer->forumTopicFor(topicRootId)->topicRootId());
 				if (!idText.isEmpty()) {
 					QGuiApplication::clipboard()->setText(idText);
-					controller->showToast(tr::ayu_IDCopiedToast(tr::now));
+					controller->showToast(tr::rynda_IDCopiedToast(tr::now));
 				}
 				return false;
 			});

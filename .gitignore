@@ -1,6 +1,10 @@
 /out/
 Debug/
 Release/
+
+# Local user settings (API credentials + build optimizations) - never commit!
+/cmake_local_user.cmake
+/api_credentials.cmake
 /ThirdParty/
 /Telegram/build/target
 /Telegram/tests/

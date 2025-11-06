@@ -12,8 +12,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "settings/settings_information.h"
 #include "ui/ui_utility.h"
 
-// AyuGram includes
-#include "ayu/ui/settings/settings_main.h"
+// TeleRynda includes
+#include "rynda/ui/settings/settings_main.h"
 
 
 namespace Info {
@@ -232,7 +232,7 @@ const Ui::RoundRect *Widget::bottomSkipRounding() const {
 rpl::producer<bool> Widget::desiredShadowVisibility() const {
 	return (_type == ::Settings::Main::Id()
 		|| _type == ::Settings::Information::Id()
-		|| _type == ::Settings::AyuMain::Id())
+		|| _type == ::Settings::RyndaMain::Id())
 		? ContentWidget::desiredShadowVisibility()
 		: rpl::single(true);
 }

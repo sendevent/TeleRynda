@@ -96,10 +96,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/forward/ayu_forward.h"
-#include "ayu/ui/context_menu/context_menu.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/forward/rynda_forward.h"
+#include "rynda/ui/context_menu/context_menu.h"
 
 
 namespace HistoryView {
@@ -1046,11 +1046,11 @@ void AddMessageActions(
 		const ContextMenuRequest &request,
 		not_null<ListWidget*> list) {
 	if (request.item) {
-		AyuUi::AddHistoryAction(menu, request.item);
-		AyuUi::AddHideMessageAction(menu, request.item);
-		AyuUi::AddUserMessagesAction(menu, request.item);
-		AyuUi::AddRepeatMessageAction(menu, request.item);
-		AyuUi::AddMessageDetailsAction(menu, request.item);
+		RyndaUi::AddHistoryAction(menu, request.item);
+		RyndaUi::AddHideMessageAction(menu, request.item);
+		RyndaUi::AddUserMessagesAction(menu, request.item);
+		RyndaUi::AddRepeatMessageAction(menu, request.item);
+		RyndaUi::AddMessageDetailsAction(menu, request.item);
 	}
 
 	AddPostLinkAction(menu, request);
@@ -1063,8 +1063,8 @@ void AddMessageActions(
 	AddRescheduleAction(menu, request, list);
 
 	if (request.item) {
-		AyuUi::AddReadUntilAction(menu, request.item);
-		AyuUi::AddBurnAction(menu, request.item);
+		RyndaUi::AddReadUntilAction(menu, request.item);
+		RyndaUi::AddBurnAction(menu, request.item);
 	}
 }
 
@@ -1632,8 +1632,8 @@ void AddWhoReactedAction(
 		not_null<QWidget*> context,
 		not_null<HistoryItem*> item,
 		not_null<Window::SessionController*> controller) {
-	const auto &settings = AyuSettings::getInstance();
-	if (!AyuUi::needToShowItem(settings.showViewsPanelInContextMenu)) {
+	const auto &settings = RyndaSettings::getInstance();
+	if (!RyndaUi::needToShowItem(settings.showViewsPanelInContextMenu)) {
 		return;
 	}
 
@@ -2063,7 +2063,7 @@ void AddSelectRestrictionAction(
 		not_null<HistoryItem*> item,
 		bool addIcon) {
 	const auto peer = item->history()->peer;
-	if ((!peer->isAyuNoForwards() && !AyuForward::isAyuForwardNeeded(item))
+	if ((!peer->isRyndaNoForwards() && !RyndaForward::isRyndaForwardNeeded(item))
 		|| item->isSponsored()) {
 		return;
 	}
@@ -2077,7 +2077,7 @@ void AddSelectRestrictionAction(
 		addIcon
 			? st::historySponsoredAboutMenuLabelPosition
 			: st::historyHasCustomEmojiPosition,
-		tr::ayu_UnforwardableContextMenuText(
+		tr::rynda_UnforwardableContextMenuText(
 			tr::now,
 			Ui::Text::RichLangValue),
 		addIcon ? &st::menuIconCopyright : nullptr);
@@ -2104,7 +2104,7 @@ TextWithEntities TransribedText(not_null<HistoryItem*> item) {
 }
 
 bool ItemHasTtl(HistoryItem *item) {
-	return false; // AyuGram: allow downloading files with ttl
+	return false; // TeleRynda: allow downloading files with ttl
 }
 
 } // namespace HistoryView

@@ -23,8 +23,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "main/main_session.h"
 #include "spellcheck/platform/platform_language.h"
 
-// AyuGram includes
-#include "ayu/features/translator/ayu_translator.h"
+// TeleRynda includes
+#include "rynda/features/translator/rynda_translator.h"
 
 
 namespace HistoryView {
@@ -240,7 +240,7 @@ void TranslateTracker::cancelSentRequest() {
 				item->translationShowRequiresRequest({});
 			}
 		}
-		Ayu::Translator::TranslateManager::currentInstance()->cancel(_requestId);
+		Rynda::Translator::TranslateManager::currentInstance()->cancel(_requestId);
 	}
 }
 
@@ -277,7 +277,7 @@ void TranslateTracker::requestSome() {
 		}
 	}
 	using Flag = MTPmessages_TranslateText::Flag;
-	_requestId = Ayu::Translator::TranslateManager::currentInstance()->request(
+	_requestId = Rynda::Translator::TranslateManager::currentInstance()->request(
 		&peer->session(),
 		MTP_flags(Flag::f_peer | Flag::f_id),
 		peer->input,

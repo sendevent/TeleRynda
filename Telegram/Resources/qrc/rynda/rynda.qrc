@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/gui">
+        <file alias="art/rynda/app_white/app.svg">../../art/rynda/app_white/app.svg</file>
+        <file alias="art/rynda/app_black/app.svg">../../art/rynda/app_black/app.svg</file>
+        <file alias="icons/rynda/nocover.svg">../../icons/rynda/nocover.svg</file>
+        <file alias="icons/rynda/donates/boosty.svg">../../icons/rynda/donates/boosty.svg</file>
+        <file alias="icons/rynda/donates/ton.svg">../../icons/rynda/donates/ton.svg</file>
+        <file alias="icons/rynda/donates/bitcoin.svg">../../icons/rynda/donates/bitcoin.svg</file>
+        <file alias="icons/rynda/donates/ethereum.svg">../../icons/rynda/donates/ethereum.svg</file>
+        <file alias="icons/rynda/donates/solana.svg">../../icons/rynda/donates/solana.svg</file>
+        <file alias="icons/rynda/donates/tron.svg">../../icons/rynda/donates/tron.svg</file>
+        <file alias="icons/rynda/donates/support_logo.svg">../../icons/rynda/donates/support_logo.svg</file>
+    </qresource>
+</RCC>

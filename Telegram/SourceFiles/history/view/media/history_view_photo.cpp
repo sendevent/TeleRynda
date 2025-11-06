@@ -45,8 +45,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_chat.h"
 #include "styles/style_chat_helpers.h"
 
-// AyuGran includes
-#include "ayu/features/message_shot/message_shot.h"
+// RyndaGran includes
+#include "rynda/features/message_shot/message_shot.h"
 
 
 namespace HistoryView {
@@ -874,7 +874,7 @@ bool Photo::dataLoaded() const {
 }
 
 bool Photo::needInfoDisplay() const {
-	if (AyuFeatures::MessageShot::ignoreRender(AyuFeatures::MessageShot::RenderPart::Date)) {
+	if (RyndaFeatures::MessageShot::ignoreRender(RyndaFeatures::MessageShot::RenderPart::Date)) {
 		return false;
 	}
 

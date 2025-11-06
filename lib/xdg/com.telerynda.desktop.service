@@ -1,0 +1,5 @@
+[D-BUS Service]
+Name=com.telerynda.desktop
+Exec=@CMAKE_INSTALL_FULL_BINDIR@/TeleRynda
+# For local development builds, manually copy binary to ~/.local/bin/TeleRynda
+

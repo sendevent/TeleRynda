@@ -13,7 +13,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "chat_helpers/tabbed_selector.h"
 #include "window/window_session_controller.h"
 #include "mainwindow.h"
-#include "ayu/ayu_settings.h"
+#include "rynda/rynda_settings.h"
 #include "core/application.h"
 #include "base/options.h"
 #include "styles/style_chat_helpers.h"
@@ -474,7 +474,7 @@ void TabbedPanel::showStarted() {
 }
 
 bool TabbedPanel::eventFilter(QObject *obj, QEvent *e) {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	if (TabbedPanelShowOnClick.value() || !settings.showEmojiPopup) {
 		return false;

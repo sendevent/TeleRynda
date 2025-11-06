@@ -40,9 +40,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include "base/random.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
 
 
 namespace Data {
@@ -1519,7 +1519,7 @@ void Reactions::send(not_null<HistoryItem*> item, bool addToRecent) {
 		_sentRequests.remove(id);
 		_owner->session().api().applyUpdates(result);
 
-		const auto &settings = AyuSettings::getInstance();
+		const auto &settings = RyndaSettings::getInstance();
 		if (!settings.sendReadMessages && settings.markReadAfterAction && item) {
 			readHistory(item);
 		}

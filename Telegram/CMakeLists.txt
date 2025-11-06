@@ -7,6 +7,12 @@
 add_executable(Telegram WIN32 MACOSX_BUNDLE)
 init_non_host_target(Telegram)
 
+# Load local user settings if available (git-ignored file)
+# Contains API credentials and build optimization settings
+if(EXISTS "${CMAKE_SOURCE_DIR}/cmake_local_user.cmake")
+    include("${CMAKE_SOURCE_DIR}/cmake_local_user.cmake")
+endif()
+
 add_subdirectory(lib_rpl)
 add_subdirectory(lib_crl)
 add_subdirectory(lib_base)
@@ -20,9 +26,9 @@ add_subdirectory(lib_webrtc)
 add_subdirectory(lib_webview)
 add_subdirectory(codegen)
 
-# AyuGram filters
+# TeleRynda filters
 add_subdirectory(lib_icu)
-# AyuGram filters
+# TeleRynda filters
 
 get_filename_component(src_loc SourceFiles REALPATH)
 get_filename_component(res_loc Resources REALPATH)
@@ -97,146 +103,146 @@ PRIVATE
     desktop-app::external_openal
     desktop-app::external_xxhash
 
-    # AyuGram filters
-    ayugram::lib_icu
+    # TeleRynda filters
+    telerynda::lib_icu
 )
 
-set(ayugram_files
-        ayu/ayu_worker.cpp
-        ayu/ayu_worker.h
-        ayu/ayu_url_handlers.cpp
-        ayu/ayu_url_handlers.h
-        ayu/ayu_state.cpp
-        ayu/ayu_state.h
-        ayu/ayu_settings.cpp
-        ayu/ayu_settings.h
-        ayu/ayu_lang.cpp
-        ayu/ayu_lang.h
-        ayu/ayu_infra.cpp
-        ayu/ayu_infra.h
-        ayu/utils/ayu_mapper.cpp
-        ayu/utils/ayu_mapper.h
-        ayu/utils/qt_key_modifiers_extended.h
-        ayu/utils/telegram_helpers.cpp
-        ayu/utils/telegram_helpers.h
-        ayu/utils/windows_utils.cpp
-        ayu/utils/windows_utils.h
-        ayu/utils/rc_manager.cpp
-        ayu/utils/rc_manager.h
-        ayu/utils/taptic_engine/taptic_engine.cpp
-        ayu/utils/taptic_engine/taptic_engine.h
-        ayu/utils/taptic_engine/platform/taptic_engine_dummy.cpp
-        ayu/utils/taptic_engine/platform/taptic_engine_dummy.h
-        ayu/utils/taptic_engine/platform/taptic_engine_mac.mm
-        ayu/utils/taptic_engine/platform/taptic_engine_mac.h
-        ayu/ui/ayu_logo.cpp
-        ayu/ui/ayu_logo.h
-        ayu/ui/utils/ayu_profile_values.cpp
-        ayu/ui/utils/ayu_profile_values.h
-        ayu/ui/utils/color_cut_quantizer.cpp
-        ayu/ui/utils/color_cut_quantizer.h
-        ayu/ui/utils/color_utils.cpp
-        ayu/ui/utils/color_utils.h
-        ayu/ui/utils/palette.cpp
-        ayu/ui/utils/palette.h
-        ayu/ui/utils/itunes_search.cpp
-        ayu/ui/utils/itunes_search.h
-        ayu/ui/settings/settings_appearance.cpp
-        ayu/ui/settings/settings_appearance.h
-        ayu/ui/settings/settings_ayu_utils.cpp
-        ayu/ui/settings/settings_ayu_utils.h
-        ayu/ui/settings/settings_chats.cpp
-        ayu/ui/settings/settings_chats.h
-        ayu/ui/settings/settings_general.cpp
-        ayu/ui/settings/settings_general.h
-        ayu/ui/settings/settings_ayu.cpp
-        ayu/ui/settings/settings_ayu.h
-        ayu/ui/settings/settings_filters.cpp
-        ayu/ui/settings/settings_filters.h
-        ayu/ui/settings/settings_main.cpp
-        ayu/ui/settings/settings_main.h
-        ayu/ui/settings/settings_other.cpp
-        ayu/ui/settings/settings_other.h
-        ayu/ui/settings/filters/settings_filters_list.cpp
-        ayu/ui/settings/filters/settings_filters_list.h
-        ayu/ui/settings/filters/per_dialog_filter.cpp
-        ayu/ui/settings/filters/per_dialog_filter.h
-        ayu/ui/settings/filters/edit_filter.cpp
-        ayu/ui/settings/filters/edit_filter.h
-        ayu/ui/context_menu/context_menu.cpp
-        ayu/ui/context_menu/context_menu.h
-        ayu/ui/context_menu/menu_item_subtext.cpp
-        ayu/ui/context_menu/menu_item_subtext.h
-        ayu/ui/message_history/history_inner.cpp
-        ayu/ui/message_history/history_inner.h
-        ayu/ui/message_history/history_item.cpp
-        ayu/ui/message_history/history_item.h
-        ayu/ui/message_history/history_section.cpp
-        ayu/ui/message_history/history_section.h
-        ayu/ui/boxes/edit_mark_box.cpp
-        ayu/ui/boxes/edit_mark_box.h
-        ayu/ui/boxes/font_selector.cpp
-        ayu/ui/boxes/font_selector.h
-        ayu/ui/boxes/import_filters_box.cpp
-        ayu/ui/boxes/import_filters_box.h
-        ayu/ui/boxes/theme_selector_box.cpp
-        ayu/ui/boxes/theme_selector_box.h
-        ayu/ui/boxes/message_shot_box.cpp
-        ayu/ui/boxes/message_shot_box.h
-        ayu/ui/boxes/donate_qr_box.cpp
-        ayu/ui/boxes/donate_qr_box.h
-        ayu/ui/boxes/donate_info_box.cpp
-        ayu/ui/boxes/donate_info_box.h
-        ayu/ui/components/image_view.cpp
-        ayu/ui/components/image_view.h
-        ayu/ui/components/icon_picker.cpp
-        ayu/ui/components/icon_picker.h
-        ayu/ui/components/saved_music.cpp
-        ayu/ui/components/saved_music.h
-        ayu/libs/json.hpp
-        ayu/libs/json_ext.hpp
-        ayu/libs/sqlite/sqlite3.c
-        ayu/libs/sqlite/sqlite3.h
-        ayu/libs/sqlite/sqlite_orm.h
-        ayu/features/streamer_mode/platform/streamer_mode_win.cpp
-        ayu/features/streamer_mode/platform/streamer_mode_win.h
-        ayu/features/streamer_mode/platform/streamer_mode_linux.cpp
-        ayu/features/streamer_mode/platform/streamer_mode_linux.h
-        ayu/features/streamer_mode/platform/streamer_mode_mac.cpp
-        ayu/features/streamer_mode/platform/streamer_mode_mac.h
-        ayu/features/streamer_mode/streamer_mode.cpp
-        ayu/features/streamer_mode/streamer_mode.h
-        ayu/features/message_shot/message_shot.cpp
-        ayu/features/message_shot/message_shot.h
-        ayu/features/forward/ayu_forward.cpp
-        ayu/features/forward/ayu_forward.h
-        ayu/features/forward/ayu_sync.cpp
-        ayu/features/forward/ayu_sync.h
-        ayu/features/translator/ayu_translator.cpp
-        ayu/features/translator/ayu_translator.h
-        ayu/features/translator/html_parser.cpp
-        ayu/features/translator/html_parser.h
-        ayu/features/translator/implementations/google.cpp
-        ayu/features/translator/implementations/google.h
-        ayu/features/translator/implementations/yandex.cpp
-        ayu/features/translator/implementations/yandex.h
-        ayu/features/translator/implementations/telegram.cpp
-        ayu/features/translator/implementations/telegram.h
-        ayu/features/translator/implementations/base.cpp
-        ayu/features/translator/implementations/base.h
-        ayu/features/filters/filters_controller.cpp
-        ayu/features/filters/filters_controller.h
-        ayu/features/filters/filters_cache_controller.cpp
-        ayu/features/filters/filters_cache_controller.h
-        ayu/features/filters/filters_utils.cpp
-        ayu/features/filters/filters_utils.h
-        ayu/features/filters/shadow_ban_utils.cpp
-        ayu/features/filters/shadow_ban_utils.h
-        ayu/data/messages_storage.cpp
-        ayu/data/messages_storage.h
-        ayu/data/entities.h
-        ayu/data/ayu_database.cpp
-        ayu/data/ayu_database.h
+set(rynda_files
+        rynda/rynda_worker.cpp
+        rynda/rynda_worker.h
+        rynda/rynda_url_handlers.cpp
+        rynda/rynda_url_handlers.h
+        rynda/rynda_state.cpp
+        rynda/rynda_state.h
+        rynda/rynda_settings.cpp
+        rynda/rynda_settings.h
+        rynda/rynda_lang.cpp
+        rynda/rynda_lang.h
+        rynda/rynda_infra.cpp
+        rynda/rynda_infra.h
+        rynda/utils/rynda_mapper.cpp
+        rynda/utils/rynda_mapper.h
+        rynda/utils/qt_key_modifiers_extended.h
+        rynda/utils/telegram_helpers.cpp
+        rynda/utils/telegram_helpers.h
+        rynda/utils/windows_utils.cpp
+        rynda/utils/windows_utils.h
+        rynda/utils/rc_manager.cpp
+        rynda/utils/rc_manager.h
+        rynda/utils/taptic_engine/taptic_engine.cpp
+        rynda/utils/taptic_engine/taptic_engine.h
+        rynda/utils/taptic_engine/platform/taptic_engine_dummy.cpp
+        rynda/utils/taptic_engine/platform/taptic_engine_dummy.h
+        rynda/utils/taptic_engine/platform/taptic_engine_mac.mm
+        rynda/utils/taptic_engine/platform/taptic_engine_mac.h
+        rynda/ui/rynda_logo.cpp
+        rynda/ui/rynda_logo.h
+        rynda/ui/utils/rynda_profile_values.cpp
+        rynda/ui/utils/rynda_profile_values.h
+        rynda/ui/utils/color_cut_quantizer.cpp
+        rynda/ui/utils/color_cut_quantizer.h
+        rynda/ui/utils/color_utils.cpp
+        rynda/ui/utils/color_utils.h
+        rynda/ui/utils/palette.cpp
+        rynda/ui/utils/palette.h
+        rynda/ui/utils/itunes_search.cpp
+        rynda/ui/utils/itunes_search.h
+        rynda/ui/settings/settings_appearance.cpp
+        rynda/ui/settings/settings_appearance.h
+        rynda/ui/settings/settings_rynda_utils.cpp
+        rynda/ui/settings/settings_rynda_utils.h
+        rynda/ui/settings/settings_chats.cpp
+        rynda/ui/settings/settings_chats.h
+        rynda/ui/settings/settings_general.cpp
+        rynda/ui/settings/settings_general.h
+        rynda/ui/settings/settings_rynda.cpp
+        rynda/ui/settings/settings_rynda.h
+        rynda/ui/settings/settings_filters.cpp
+        rynda/ui/settings/settings_filters.h
+        rynda/ui/settings/settings_main.cpp
+        rynda/ui/settings/settings_main.h
+        rynda/ui/settings/settings_other.cpp
+        rynda/ui/settings/settings_other.h
+        rynda/ui/settings/filters/settings_filters_list.cpp
+        rynda/ui/settings/filters/settings_filters_list.h
+        rynda/ui/settings/filters/per_dialog_filter.cpp
+        rynda/ui/settings/filters/per_dialog_filter.h
+        rynda/ui/settings/filters/edit_filter.cpp
+        rynda/ui/settings/filters/edit_filter.h
+        rynda/ui/context_menu/context_menu.cpp
+        rynda/ui/context_menu/context_menu.h
+        rynda/ui/context_menu/menu_item_subtext.cpp
+        rynda/ui/context_menu/menu_item_subtext.h
+        rynda/ui/message_history/history_inner.cpp
+        rynda/ui/message_history/history_inner.h
+        rynda/ui/message_history/history_item.cpp
+        rynda/ui/message_history/history_item.h
+        rynda/ui/message_history/history_section.cpp
+        rynda/ui/message_history/history_section.h
+        rynda/ui/boxes/edit_mark_box.cpp
+        rynda/ui/boxes/edit_mark_box.h
+        rynda/ui/boxes/font_selector.cpp
+        rynda/ui/boxes/font_selector.h
+        rynda/ui/boxes/import_filters_box.cpp
+        rynda/ui/boxes/import_filters_box.h
+        rynda/ui/boxes/theme_selector_box.cpp
+        rynda/ui/boxes/theme_selector_box.h
+        rynda/ui/boxes/message_shot_box.cpp
+        rynda/ui/boxes/message_shot_box.h
+        rynda/ui/boxes/donate_qr_box.cpp
+        rynda/ui/boxes/donate_qr_box.h
+        rynda/ui/boxes/donate_info_box.cpp
+        rynda/ui/boxes/donate_info_box.h
+        rynda/ui/components/image_view.cpp
+        rynda/ui/components/image_view.h
+        rynda/ui/components/icon_picker.cpp
+        rynda/ui/components/icon_picker.h
+        rynda/ui/components/saved_music.cpp
+        rynda/ui/components/saved_music.h
+        rynda/libs/json.hpp
+        rynda/libs/json_ext.hpp
+        rynda/libs/sqlite/sqlite3.c
+        rynda/libs/sqlite/sqlite3.h
+        rynda/libs/sqlite/sqlite_orm.h
+        rynda/features/streamer_mode/platform/streamer_mode_win.cpp
+        rynda/features/streamer_mode/platform/streamer_mode_win.h
+        rynda/features/streamer_mode/platform/streamer_mode_linux.cpp
+        rynda/features/streamer_mode/platform/streamer_mode_linux.h
+        rynda/features/streamer_mode/platform/streamer_mode_mac.cpp
+        rynda/features/streamer_mode/platform/streamer_mode_mac.h
+        rynda/features/streamer_mode/streamer_mode.cpp
+        rynda/features/streamer_mode/streamer_mode.h
+        rynda/features/message_shot/message_shot.cpp
+        rynda/features/message_shot/message_shot.h
+        rynda/features/forward/rynda_forward.cpp
+        rynda/features/forward/rynda_forward.h
+        rynda/features/forward/rynda_sync.cpp
+        rynda/features/forward/rynda_sync.h
+        rynda/features/translator/rynda_translator.cpp
+        rynda/features/translator/rynda_translator.h
+        rynda/features/translator/html_parser.cpp
+        rynda/features/translator/html_parser.h
+        rynda/features/translator/implementations/google.cpp
+        rynda/features/translator/implementations/google.h
+        rynda/features/translator/implementations/yandex.cpp
+        rynda/features/translator/implementations/yandex.h
+        rynda/features/translator/implementations/telegram.cpp
+        rynda/features/translator/implementations/telegram.h
+        rynda/features/translator/implementations/base.cpp
+        rynda/features/translator/implementations/base.h
+        rynda/features/filters/filters_controller.cpp
+        rynda/features/filters/filters_controller.h
+        rynda/features/filters/filters_cache_controller.cpp
+        rynda/features/filters/filters_cache_controller.h
+        rynda/features/filters/filters_utils.cpp
+        rynda/features/filters/filters_utils.h
+        rynda/features/filters/shadow_ban_utils.cpp
+        rynda/features/filters/shadow_ban_utils.h
+        rynda/data/messages_storage.cpp
+        rynda/data/messages_storage.h
+        rynda/data/entities.h
+        rynda/data/rynda_database.cpp
+        rynda/data/rynda_database.h
 
         info/profile/info_profile_music_button.cpp
         info/profile/info_profile_music_button.h
@@ -246,7 +252,7 @@ target_precompile_headers(Telegram PRIVATE $<$<COMPILE_LANGUAGE:CXX,OBJCXX>:${sr
 nice_target_sources(Telegram ${src_loc}
 PRIVATE
     ${style_files}
-    ${ayugram_files}
+    ${rynda_files}
 
     api/api_attached_stickers.cpp
     api/api_attached_stickers.h
@@ -1908,7 +1914,7 @@ endif()
 
 nice_target_sources(Telegram ${res_loc}
 PRIVATE
-    qrc/ayu/ayu.qrc
+    qrc/rynda/rynda.qrc
 
     qrc/emoji_1.qrc
     qrc/emoji_2.qrc
@@ -1969,7 +1975,7 @@ elseif (APPLE)
 #    endif()
 
     if (CMAKE_GENERATOR STREQUAL Xcode)
-        set(ayugram_icons
+        set(telerynda_icons
             Default
             Alt
             Discord
@@ -1985,7 +1991,7 @@ elseif (APPLE)
         )
 
 #        set(ICON_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/IconOutput")
-        foreach (icon ${ayugram_icons})
+        foreach (icon ${telerynda_icons})
 #            add_custom_command(TARGET Telegram
 #                    PRE_LINK
 #                    COMMAND mkdir -p "${ICON_OUTPUT_DIR}"
@@ -2080,12 +2086,12 @@ if (build_macstore)
     )
 else()
     if (CMAKE_GENERATOR STREQUAL Xcode)
-        set(bundle_identifier "one.ayugram.AyuGramDesktop$<$<CONFIG:Debug>:Debug>")
+        set(bundle_identifier "one.telerynda.TeleRyndaDesktop$<$<CONFIG:Debug>:Debug>")
     else()
-        set(bundle_identifier "one.ayugram.AyuGramDesktop")
+        set(bundle_identifier "one.telerynda.TeleRyndaDesktop")
     endif()
     set(bundle_entitlements "Telegram.entitlements")
-    set(output_name "AyuGram")
+    set(output_name "TeleRynda")
 endif()
 
 if (CMAKE_GENERATOR STREQUAL Xcode)
@@ -2127,14 +2133,14 @@ PRIVATE
     TDESKTOP_API_ID=${TDESKTOP_API_ID}
     TDESKTOP_API_HASH=${TDESKTOP_API_HASH}
     G_LOG_DOMAIN="Telegram"
-    U_STATIC_IMPLEMENTATION=1 # AyuGram: do not use __declspec(dllimport) when including icu headers
+    U_STATIC_IMPLEMENTATION=1 # TeleRynda: do not use __declspec(dllimport) when including icu headers
 )
 
 get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if (APPLE
     OR is_multi_config
     OR NOT CMAKE_EXECUTABLE_SUFFIX STREQUAL ""
-    OR NOT "${output_name}" STREQUAL "AyuGram")
+    OR NOT "${output_name}" STREQUAL "TeleRynda")
     set(output_folder ${CMAKE_BINARY_DIR})
 else()
     set(output_folder ${CMAKE_BINARY_DIR}/bin)
@@ -2308,21 +2314,21 @@ endif()
 
 if (LINUX AND DESKTOP_APP_USE_PACKAGED)
     include(GNUInstallDirs)
-    configure_file("../lib/xdg/com.ayugram.desktop.service" "${CMAKE_CURRENT_BINARY_DIR}/com.ayugram.desktop.service" @ONLY)
-    configure_file("../lib/xdg/com.ayugram.desktop.metainfo.xml" "${CMAKE_CURRENT_BINARY_DIR}/com.ayugram.desktop.metainfo.xml" @ONLY)
-    generate_appstream_changelog(Telegram "${CMAKE_SOURCE_DIR}/changelog.txt" "${CMAKE_CURRENT_BINARY_DIR}/com.ayugram.desktop.metainfo.xml")
+    configure_file("../lib/xdg/com.telerynda.desktop.service" "${CMAKE_CURRENT_BINARY_DIR}/com.telerynda.desktop.service" @ONLY)
+    configure_file("../lib/xdg/com.telerynda.desktop.metainfo.xml" "${CMAKE_CURRENT_BINARY_DIR}/com.telerynda.desktop.metainfo.xml" @ONLY)
+    generate_appstream_changelog(Telegram "${CMAKE_SOURCE_DIR}/changelog.txt" "${CMAKE_CURRENT_BINARY_DIR}/com.telerynda.desktop.metainfo.xml")
     install(TARGETS Telegram RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" BUNDLE DESTINATION "${CMAKE_INSTALL_BINDIR}")
-    install(FILES "Resources/art/icon16.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon32.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon48.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon64.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon128.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/128x128/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon256.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/art/icon512.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps" RENAME "com.ayugram.desktop.png")
-    install(FILES "Resources/icons/tray_monochrome.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.ayugram.desktop-symbolic.svg")
-    install(FILES "Resources/icons/tray_monochrome_attention.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.ayugram.desktop-attention-symbolic.svg")
-    install(FILES "Resources/icons/tray_monochrome_mute.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.ayugram.desktop-mute-symbolic.svg")
-    install(FILES "../lib/xdg/com.ayugram.desktop.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/com.ayugram.desktop.service" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/dbus-1/services")
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/com.ayugram.desktop.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
+    install(FILES "Resources/art/icon16.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon32.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon48.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon64.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon128.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/128x128/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon256.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/art/icon512.png" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps" RENAME "com.telerynda.desktop.png")
+    install(FILES "Resources/icons/tray_monochrome.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.telerynda.desktop-symbolic.svg")
+    install(FILES "Resources/icons/tray_monochrome_attention.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.telerynda.desktop-attention-symbolic.svg")
+    install(FILES "Resources/icons/tray_monochrome_mute.svg" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/symbolic/apps" RENAME "com.telerynda.desktop-mute-symbolic.svg")
+    install(FILES "../lib/xdg/com.telerynda.desktop.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/com.telerynda.desktop.service" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/dbus-1/services")
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/com.telerynda.desktop.metainfo.xml" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
 endif()

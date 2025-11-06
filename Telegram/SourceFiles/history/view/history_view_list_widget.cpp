@@ -81,8 +81,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtWidgets/QApplication>
 #include <QtCore/QMimeData>
 
-// AyuGram includes
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/utils/telegram_helpers.h"
 
 
 namespace HistoryView {

@@ -49,8 +49,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/item_text_options.h"
 #include "lang/lang_keys.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace {
@@ -607,7 +607,7 @@ QString NewMessagePostAuthor(const Api::SendAction &action) {
 bool ShouldSendSilent(
 		not_null<PeerData*> peer,
 		const Api::SendOptions &options) {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.sendWithoutSound) {
 		return !options.silent;
 	}
@@ -843,9 +843,9 @@ MessageFlags FlagsFromMTP(
 			? Flag::IsOrWasScheduled
 			: Flag())
 		| ((flags & MTP::f_views) ? Flag::HasViews : Flag())
-		// AyuGram: removed
+		// TeleRynda: removed
 		// | ((flags & MTP::f_noforwards) ? Flag::NoForwards : Flag())
-		| (flags & MTP::f_noforwards ? Flag::AyuNoForwards : Flag())
+		| (flags & MTP::f_noforwards ? Flag::RyndaNoForwards : Flag())
 		| ((flags & MTP::f_invert_media) ? Flag::InvertMedia : Flag())
 		| ((flags & MTP::f_video_processing_pending)
 			? Flag::EstimatedDate
@@ -1170,7 +1170,7 @@ void CheckReactionNotificationSchedule(
 		return;
 	}
 	const auto peer = item->history()->peer;
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if ((peer->isChannel() && !peer->isMegagroup() && !settings.showChannelReactions)
 		|| (peer->isMegagroup() && !settings.showGroupReactions)) {
 		item->markEffectWatched();
@@ -1254,9 +1254,9 @@ void CheckReactionNotificationSchedule(
 }
 
 [[nodiscard]] TextWithEntities UnsupportedMessageText() {
-	const auto siteLink = u"https://t.me/AyuGramReleases"_q;
+	const auto siteLink = u"https://t.me/TeleRyndaReleases"_q;
 	auto result = TextWithEntities{
-		tr::lng_message_unsupported(tr::now, lt_link, siteLink).replace("Telegram", "AyuGram")
+		tr::lng_message_unsupported(tr::now, lt_link, siteLink).replace("Telegram", "TeleRynda")
 	};
 	TextUtilities::ParseEntities(result, Ui::ItemTextNoMonoOptions().flags);
 	result.entities.push_front(

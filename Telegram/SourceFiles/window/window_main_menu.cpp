@@ -79,14 +79,14 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
 #include "boxes/abstract_box.h"
-#include "ayu/features/streamer_mode/streamer_mode.h"
-#include "styles/style_ayu_icons.h"
+#include "rynda/features/streamer_mode/streamer_mode.h"
+#include "styles/style_rynda_icons.h"
 #include "lang_auto.h"
-#include "ayu/ui/settings/settings_main.h"
+#include "rynda/ui/settings/settings_main.h"
 
 namespace Window {
 namespace {
@@ -109,7 +109,7 @@ constexpr auto kPlayStatusLimit = 12;
 
 [[nodiscard]] rpl::producer<TextWithEntities> SetStatusLabel(
 		not_null<Main::Session*> session) {
-	return tr::ayu_AyuPreferences() | rpl::map([](const QString& text) {
+	return tr::rynda_RyndaPreferences() | rpl::map([](const QString& text) {
 		return Ui::Text::Link(text);
 	});
 }
@@ -381,7 +381,7 @@ MainMenu::MainMenu(
 	parentResized();
 
 	_telegram->setMarkedText(Ui::Text::Link(
-		u"AyuGram Desktop"_q,
+		u"TeleRynda Desktop"_q,
 		u"https://ayugram.one"_q));
 	_telegram->setLinksTrusted();
 	_version->setMarkedText(
@@ -623,7 +623,7 @@ void MainMenu::setupAccountsToggle() {
 
 void MainMenu::setupSetEmojiStatus() {
 	_setEmojiStatus->overrideLinkClickHandler([=] {
-		_controller->showSettings(Settings::AyuMain::Id());
+		_controller->showSettings(Settings::RyndaMain::Id());
 	});
 }
 
@@ -638,7 +638,7 @@ void MainMenu::showFinished() {
 void MainMenu::setupMenu() {
 	using namespace Settings;
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto controller = _controller;
 	const auto addAction = [&](
@@ -715,24 +715,24 @@ void MainMenu::setupMenu() {
 
 		if (settings.showLReadToggleInDrawer) {
 			addAction(
-				tr::ayu_LReadMessages(),
-				{&st::ayuLReadMenuIcon}
+				tr::rynda_LReadMessages(),
+				{&st::ryndaLReadMenuIcon}
 			)->setClickedCallback([=]
 			{
 				const auto prev = settings.sendReadMessages;
-				AyuSettings::set_sendReadMessages(false);
+				RyndaSettings::set_sendReadMessages(false);
 
 				const auto chats = controller->session().data().chatsList();
 				MarkAsReadChatList(chats);
 
-				AyuSettings::set_sendReadMessages(prev);
+				RyndaSettings::set_sendReadMessages(prev);
 			});
 		}
 
 		if (settings.showSReadToggleInDrawer) {
 			auto callback = [=](Fn<void()> &&close) {
 				auto prev = settings.sendReadMessages;
-				AyuSettings::set_sendReadMessages(true);
+				RyndaSettings::set_sendReadMessages(true);
 
 				auto chats = controller->session().data().chatsList();
 				MarkAsReadChatList(chats);
@@ -740,20 +740,20 @@ void MainMenu::setupMenu() {
 				// slight delay for forums to send packets
 				dispatchToMainThread([=]
 				{
-					AyuSettings::set_sendReadMessages(prev);
+					RyndaSettings::set_sendReadMessages(prev);
 				}, 200);
 				close();
 			};
 
 			addAction(
-				tr::ayu_SReadMessages(),
-				{&st::ayuSReadMenuIcon}
+				tr::rynda_SReadMessages(),
+				{&st::ryndaSReadMenuIcon}
 			)->setClickedCallback([=]
 			{
 				auto box = Ui::MakeConfirmBox({
-					.text = tr::ayu_ReadConfirmationBoxQuestion(),
+					.text = tr::rynda_ReadConfirmationBoxQuestion(),
 					.confirmed = callback,
-					.confirmText = tr::ayu_ReadConfirmationBoxActionText()
+					.confirmText = tr::rynda_ReadConfirmationBoxActionText()
 				});
 				Ui::show(std::move(box));
 			});
@@ -833,34 +833,34 @@ void MainMenu::setupMenu() {
 
 	if (settings.showGhostToggleInDrawer) {
 		const auto ghostModeToggle = addAction(
-			tr::ayu_GhostModeToggle(),
-			{&st::ayuGhostIcon}
-		)->toggleOn(AyuSettings::get_ghostModeEnabledReactive());
+			tr::rynda_GhostModeToggle(),
+			{&st::ryndaGhostIcon}
+		)->toggleOn(RyndaSettings::get_ghostModeEnabledReactive());
 
 		ghostModeToggle->toggledChanges(
 		) | rpl::start_with_next(
 			[=](bool ghostMode)
 			{
-				AyuSettings::set_ghostModeEnabled(ghostMode);
-				AyuSettings::save();
+				RyndaSettings::set_ghostModeEnabled(ghostMode);
+				RyndaSettings::save();
 			},
 			ghostModeToggle->lifetime());
 	}
 
 	if (settings.showStreamerToggleInDrawer) {
 		const auto streamerModeToggle = addAction(
-			tr::ayu_StreamerModeToggle(),
-			{&st::ayuStreamerModeMenuIcon}
-		)->toggleOn(rpl::single(AyuFeatures::StreamerMode::isEnabled()));
+			tr::rynda_StreamerModeToggle(),
+			{&st::ryndaStreamerModeMenuIcon}
+		)->toggleOn(rpl::single(RyndaFeatures::StreamerMode::isEnabled()));
 
 		streamerModeToggle->toggledChanges(
 		) | rpl::start_with_next(
 			[=](bool enabled)
 			{
 				if (enabled) {
-					AyuFeatures::StreamerMode::enable();
+					RyndaFeatures::StreamerMode::enable();
 				} else {
-					AyuFeatures::StreamerMode::disable();
+					RyndaFeatures::StreamerMode::disable();
 				}
 			},
 			streamerModeToggle->lifetime());

@@ -80,8 +80,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtGui/QGuiApplication>
 
-// AyuGram includes
-#include "ayu/ayu_url_handlers.h"
+// TeleRynda includes
+#include "rynda/rynda_url_handlers.h"
 
 
 namespace Core {
@@ -1742,19 +1742,19 @@ const std::vector<LocalUrlHandler> &LocalUrlHandlers() {
 		},
 		{
 			u"^user\\?(.+)(#|$)"_q,
-			AyuUrlHandlers::ResolveUser
+			RyndaUrlHandlers::ResolveUser
 		},
 		{
 			u"^chat\\?(.+)(#|$)"_q,
-			AyuUrlHandlers::ResolveChat
+			RyndaUrlHandlers::ResolveChat
 		},
 		{
-			u"^ayu(/?.+)?(#|$)"_q,
-			AyuUrlHandlers::HandleAyu
+			u"^rynda(/?.+)?(#|$)"_q,
+			RyndaUrlHandlers::HandleRynda
 		},
 		{
 			u"^support$"_q,
-			AyuUrlHandlers::HandleSupport
+			RyndaUrlHandlers::HandleSupport
 		},
 		{
 			u"^([^\\?]+)(\\?|#|$)"_q,

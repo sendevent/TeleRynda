@@ -63,8 +63,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtCore/QMimeData>
 
-// AyuGram includes
-#include "ayu/features/message_shot/message_shot.h"
+// TeleRynda includes
+#include "rynda/features/message_shot/message_shot.h"
 
 
 namespace HistoryView {
@@ -207,7 +207,7 @@ ScheduledWidget::ScheduledWidget(
 	}, _topBar->lifetime());
 	_topBar->messageShotSelectionRequest(
 	) | rpl::start_with_next([=] {
-		AyuFeatures::MessageShot::Wrapper(_inner, [=] { clearSelected(); });
+		RyndaFeatures::MessageShot::Wrapper(_inner, [=] { clearSelected(); });
 	}, _topBar->lifetime());
 	_topBar->clearSelectionRequest(
 	) | rpl::start_with_next([=] {

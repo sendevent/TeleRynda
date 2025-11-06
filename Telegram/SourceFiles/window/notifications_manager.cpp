@@ -46,9 +46,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
 
 #if __has_include(<gio/gio.hpp>)
 #include <gio/gio.hpp>
@@ -382,7 +382,7 @@ System::Timing System::countTiming(
 		delay = config.notifyDefaultDelay;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.disableNotificationsDelay) {
 		delay = minimalDelay;
 	}

@@ -1,0 +1,32 @@
+// This is the source code of TeleRynda for Desktop.
+//
+// We do not and cannot prevent the use of our code,
+// but be respectful and credit the original author.
+//
+// Copyright @Radolyn, 2025
+
+#include "rynda/features/streamer_mode/platform/streamer_mode_mac.h"
+
+#include "window/window_controller.h"
+
+namespace RyndaFeatures::StreamerMode::Impl {
+
+void enableHook() {
+
+}
+
+void disableHook() {
+
+}
+
+void hideWidgetWindow(QWidget *widget)
+{
+
+}
+
+void showWidgetWindow(QWidget *widget)
+{
+
+}
+
+}

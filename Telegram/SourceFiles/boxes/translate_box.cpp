@@ -38,8 +38,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QLocale>
 
-// AyuGram includes
-#include "ayu/features/translator/ayu_translator.h"
+// TeleRynda includes
+#include "rynda/features/translator/rynda_translator.h"
 
 
 namespace Ui {
@@ -230,7 +230,7 @@ void TranslateBox(
 	const auto send = [=](LanguageId to) {
 		loading->show(anim::type::instant);
 		translated->hide(anim::type::instant);
-		const auto reqId = Ayu::Translator::TranslateManager::currentInstance()->request(
+		const auto reqId = Rynda::Translator::TranslateManager::currentInstance()->request(
 			&peer->session(),
 			MTP_flags(flags),
 			msgId ? peer->input : MTP_inputPeerEmpty(),
@@ -264,7 +264,7 @@ void TranslateBox(
 
 		box->boxClosing() | rpl::start_with_next([=]
 		{
-			Ayu::Translator::TranslateManager::currentInstance()->cancel(reqId);
+			Rynda::Translator::TranslateManager::currentInstance()->cancel(reqId);
 		}, box->lifetime());
 	};
 	state->to.value() | rpl::start_with_next(send, box->lifetime());

@@ -58,10 +58,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_dialogs.h"
 #include "styles/style_menu_icons.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/ui/components/saved_music.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/ui/components/saved_music.h"
+#include "rynda/utils/telegram_helpers.h"
 #include "ui/toast/toast.h"
 #include "ui/wrap/slide_wrap.h"
 
@@ -896,9 +896,9 @@ void Cover::setupSavedMusic() {
 			resize(width(), _st.height);
 		} else if (!_musicButton) {
 			using namespace Info::Saved;
-			_musicButton = object_ptr<Ui::SlideWrap<AyuMusicButton>>(
+			_musicButton = object_ptr<Ui::SlideWrap<RyndaMusicButton>>(
 				this,
-				object_ptr<AyuMusicButton>(
+				object_ptr<RyndaMusicButton>(
 					this,
 					DocumentMusicButtonData(document, item),
 					[=]
@@ -913,17 +913,17 @@ void Cover::setupSavedMusic() {
 			{
 				return mouseButton == Qt::RightButton;
 			}) | rpl::start_with_next([=] {
-				const auto &settings = AyuSettings::getInstance();
+				const auto &settings = RyndaSettings::getInstance();
 
 				const auto contextMenu = new Ui::PopupMenu(nullptr, st::popupMenuWithIcons);
 				contextMenu->setAttribute(Qt::WA_DeleteOnClose);
 
 				contextMenu->addAction(
-					settings.adaptiveCoverColor ? tr::ayu_DisableColorfulCover(tr::now) : tr::ayu_EnableColorfulCover(tr::now),
+					settings.adaptiveCoverColor ? tr::rynda_DisableColorfulCover(tr::now) : tr::rynda_EnableColorfulCover(tr::now),
 					[=]
 					{
-						AyuSettings::set_adaptiveCoverColor(!settings.adaptiveCoverColor);
-						AyuSettings::save();
+						RyndaSettings::set_adaptiveCoverColor(!settings.adaptiveCoverColor);
+						RyndaSettings::save();
 
 						_musicButton->entity()->updateData(DocumentMusicButtonData(document, item));
 					},

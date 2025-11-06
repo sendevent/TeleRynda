@@ -23,8 +23,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "lang/lang_keys.h"
 #include "apiwrap.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Data {
@@ -1007,7 +1007,7 @@ void RepliesList::sendReadTillRequest() {
 	const auto api = &_history->session().api();
 	api->request(base::take(_readRequestId)).cancel();
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (!settings.sendReadMessages) {
 		return;
 	}

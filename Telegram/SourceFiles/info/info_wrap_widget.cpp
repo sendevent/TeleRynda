@@ -53,14 +53,14 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_menu_icons.h"
 #include "styles/style_layers.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/filters/shadow_ban_utils.h"
-#include "ayu/ui/settings/filters/edit_filter.h"
-#include "ayu/ui/settings/filters/settings_filters_list.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/filters/shadow_ban_utils.h"
+#include "rynda/ui/settings/filters/edit_filter.h"
+#include "rynda/ui/settings/filters/settings_filters_list.h"
+#include "rynda/utils/telegram_helpers.h"
 #include "inline_bots/bot_attach_web_view.h"
-#include "styles/style_ayu_settings.h"
+#include "styles/style_rynda_settings.h"
 #include "window/window_peer_menu.h"
 
 namespace Info {
@@ -429,7 +429,7 @@ void WrapWidget::setupTopBarMenuToggle() {
 						Box(Ui::FillPeerQrBox, self, std::nullopt, nullptr));
 				});
 			}
-		} else if (section.settingsType() == ::Settings::AyuFiltersList::Id()) {
+		} else if (section.settingsType() == ::Settings::RyndaFiltersList::Id()) {
 			const auto controller = _controller->parentController();
 			const auto &st = st::filtersAddIcon;
 			const auto button = _topBar->addButton(base::make_unique_q<Ui::IconButton>(_topBar, st));
@@ -452,7 +452,7 @@ void WrapWidget::setupTopBarMenuToggle() {
 							ShadowBanUtils::addShadowBan(realId);
 							return true;
 						},
-						tr::ayu_FiltersMenuSelectChat(),
+						tr::rynda_FiltersMenuSelectChat(),
 						nullptr,
 						types
 					);
@@ -473,7 +473,7 @@ void WrapWidget::setupTopBarMenuToggle() {
 				{
 					// open new
 					controller->showExclude = false;
-					controller->showSettings(::Settings::AyuFiltersList::Id());
+					controller->showSettings(::Settings::RyndaFiltersList::Id());
 				});
 			}
 		}
@@ -745,7 +745,7 @@ void WrapWidget::finishShowContent() {
 		updateContentGeometry();
 	}, _content->lifetime());
 
-	AyuSettings::get_filtersUpdate() | rpl::start_with_next([=]
+	RyndaSettings::get_filtersUpdate() | rpl::start_with_next([=]
 	{
 		auto contentMemento = _content->createMemento();
 		if (!contentMemento) {

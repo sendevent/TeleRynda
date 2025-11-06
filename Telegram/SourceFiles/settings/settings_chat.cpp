@@ -82,8 +82,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_window.h"
 #include "styles/style_dialogs.h"
 
-// AyuGram includes
-#include "ayu/features/message_shot/message_shot.h"
+// TeleRynda includes
+#include "rynda/features/message_shot/message_shot.h"
 #include "window/themes/window_theme_preview.h"
 
 
@@ -262,7 +262,7 @@ void ColorsPalette::show(Type type) {
 		return;
 	}
 	list.insert(list.begin(), scheme->accentColor);
-	const auto color = AyuFeatures::MessageShot::isChoosingTheme() ? AyuFeatures::MessageShot::getSelectedColorFromDefault() : Core::App().settings().themesAccentColors().get(type);
+	const auto color = RyndaFeatures::MessageShot::isChoosingTheme() ? RyndaFeatures::MessageShot::getSelectedColorFromDefault() : Core::App().settings().themesAccentColors().get(type);
 	const auto current = color.value_or(scheme->accentColor);
 	const auto i = ranges::find(list, current);
 	if (i == end(list)) {
@@ -1528,13 +1528,13 @@ void SetupDefaultThemes(
 	{
 		const Data::CloudTheme theme;
 		if (const auto preview = PreviewFromFile(QByteArray(), path, theme)) {
-			AyuFeatures::MessageShot::setPalette(preview->instance.palette);
+			RyndaFeatures::MessageShot::setPalette(preview->instance.palette);
 		}
 	};
 
 	const auto chosen = [] {
-		if (AyuFeatures::MessageShot::isChoosingTheme()) {
-			return AyuFeatures::MessageShot::getSelectedFromDefault();
+		if (RyndaFeatures::MessageShot::isChoosingTheme()) {
+			return RyndaFeatures::MessageShot::getSelectedFromDefault();
 		}
 
 		const auto &object = Background()->themeObject();
@@ -1574,8 +1574,8 @@ void SetupDefaultThemes(
 	const auto schemeClicked = [=](
 			const Scheme &scheme,
 			Qt::KeyboardModifiers modifiers) {
-		if (AyuFeatures::MessageShot::isChoosingTheme()) {
-			AyuFeatures::MessageShot::setDefaultSelected(scheme.type);
+		if (RyndaFeatures::MessageShot::isChoosingTheme()) {
+			RyndaFeatures::MessageShot::setDefaultSelected(scheme.type);
 			updateMessageShotPalette(scheme.path);
 			return;
 		}
@@ -1623,8 +1623,8 @@ void SetupDefaultThemes(
 			return;
 		}
 		if (i != end(checks)) {
-			if (AyuFeatures::MessageShot::isChoosingTheme()) {
-				if (const auto color = AyuFeatures::MessageShot::getSelectedColorFromDefault()) {
+			if (RyndaFeatures::MessageShot::isChoosingTheme()) {
+				if (const auto color = RyndaFeatures::MessageShot::getSelectedColorFromDefault()) {
 					const auto colorizer = ColorizerFrom(*scheme, color.value());
 					i->second->setColors(ColorsFromScheme(*scheme, colorizer));
 				} else {
@@ -1642,11 +1642,11 @@ void SetupDefaultThemes(
 		}
 	};
 	group->setChangedCallback([=](Type type) {
-		if (AyuFeatures::MessageShot::isChoosingTheme()) {
+		if (RyndaFeatures::MessageShot::isChoosingTheme()) {
 			palette->show(type);
 			refreshColorizer(type);
 			group->setValue(type);
-			AyuFeatures::MessageShot::setDefaultSelected(type);
+			RyndaFeatures::MessageShot::setDefaultSelected(type);
 
 			const auto scheme = ranges::find(kSchemesList, type, &Scheme::type);
 			if (scheme == end(kSchemesList)) {
@@ -1707,12 +1707,12 @@ void SetupDefaultThemes(
 		}
 	}, block->lifetime());
 
-	if (AyuFeatures::MessageShot::isChoosingTheme()) {
+	if (RyndaFeatures::MessageShot::isChoosingTheme()) {
 		palette->selected() | rpl::start_with_next(
 			[=](QColor color)
 			{
-				AyuFeatures::MessageShot::setDefaultSelectedColor(color);
-				refreshColorizer(AyuFeatures::MessageShot::getSelectedFromDefault());
+				RyndaFeatures::MessageShot::setDefaultSelectedColor(color);
+				refreshColorizer(RyndaFeatures::MessageShot::getSelectedFromDefault());
 
 				const auto type = chosen();
 				const auto scheme = ranges::find(kSchemesList, type, &Scheme::type);
@@ -1724,9 +1724,9 @@ void SetupDefaultThemes(
 			},
 			container->lifetime());
 
-		AyuFeatures::MessageShot::resetDefaultSelectedEvents() | rpl::start_with_next([=]
+		RyndaFeatures::MessageShot::resetDefaultSelectedEvents() | rpl::start_with_next([=]
 			{
-				refreshColorizer(AyuFeatures::MessageShot::getSelectedFromDefault()); // hide colorizer
+				refreshColorizer(RyndaFeatures::MessageShot::getSelectedFromDefault()); // hide colorizer
 				group->setValue(Type(-1));
 			},
 			container->lifetime());
@@ -1734,7 +1734,7 @@ void SetupDefaultThemes(
 
 	palette->selected(
 	) | rpl::start_with_next([=](QColor color) {
-		if (AyuFeatures::MessageShot::isChoosingTheme()) {
+		if (RyndaFeatures::MessageShot::isChoosingTheme()) {
 			return;
 		}
 

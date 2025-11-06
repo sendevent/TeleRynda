@@ -39,8 +39,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <xxhash.h> // XXH64.
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "styles/style_ayu_icons.h"
+// TeleRynda includes
+#include "styles/style_rynda_icons.h"
 
 
 [[nodiscard]] PeerListRowId UniqueRowIdFromString(const QString &d) {

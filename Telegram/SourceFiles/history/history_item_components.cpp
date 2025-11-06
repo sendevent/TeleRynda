@@ -62,9 +62,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtGui/QGuiApplication>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/filters/filters_controller.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/filters/filters_controller.h"
 
 namespace {
 
@@ -526,7 +526,7 @@ void HistoryMessageReply::updateData(
 		&& (asExternal || _fields.manualQuote);
 	_multiline = !_fields.storyId && (asExternal || nonEmptyQuote);
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	const auto author = resolvedMessage
 							? resolvedMessage->from().get()
 							: resolvedStory
@@ -692,7 +692,7 @@ QString ReplyMarkupClickHandler::copyToClipboardContextItemText() const {
 	if (button) {
 		using Type = HistoryMessageMarkupButton::Type;
 		if (button->type == Type::Callback) {
-			return tr::ayu_ContextCopyCallbackData(tr::now);
+			return tr::rynda_ContextCopyCallbackData(tr::now);
 		}
 		return tr::lng_context_copy_link(tr::now);
 	}

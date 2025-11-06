@@ -93,8 +93,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_chat_helpers.h"
 #include "styles/style_menu_icons.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace HistoryView {
@@ -1621,7 +1621,7 @@ void ComposeControls::init() {
 		updateAttachBotsMenu();
 	}, _wrap->lifetime());
 
-	AyuSettings::get_historyUpdateReactive() | rpl::start_with_next([=]
+	RyndaSettings::get_historyUpdateReactive() | rpl::start_with_next([=]
 	{
 		updateSendButtonType();
 		updateControlsVisibility();
@@ -1638,7 +1638,7 @@ void ComposeControls::orderControls() {
 }
 
 bool ComposeControls::showRecordButton() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (!settings.showMicrophoneButtonInMessageField) {
 		return false;
 	}
@@ -2745,7 +2745,7 @@ void ComposeControls::updateControlsGeometry(QSize size) {
 	// (_attachToggle|_replaceMedia) (_sendAs) -- _inlineResults ------ _tabbedPanel -- _fieldBarCancel
 	// (_attachDocument|_attachPhoto) _field (_ttlInfo) (_scheduled) (_silent|_botCommandStart) _tabbedSelectorToggle _send
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto fieldWidth = size.width()
 		- (settings.showAttachButtonInMessageField ? _attachToggle->width() : 0)
@@ -2834,7 +2834,7 @@ void ComposeControls::updateControlsGeometry(QSize size) {
 }
 
 void ComposeControls::updateControlsVisibility() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	if (_botCommandStart) {
 		SWITCH_BUTTON(_botCommandStart, _botCommandShown && settings.showCommandsButtonInMessageField);

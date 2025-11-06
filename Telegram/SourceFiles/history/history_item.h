@@ -203,7 +203,7 @@ public:
 	void setRealShortcutId(BusinessShortcutId id);
 	void setCustomServiceLink(ClickHandlerPtr link);
 
-	[[nodiscard]] bool isAyuNoForwards() const;
+	[[nodiscard]] bool isRyndaNoForwards() const;
 
 	void addLogEntryOriginal(
 		WebPageId localId,
@@ -425,7 +425,7 @@ public:
 	void setDeleted();
 	bool isDeleted() const;
 	void applyTTL(TimeId destroyAt);
-	void setAyuHint(const QString &hint);
+	void setRyndaHint(const QString &hint);
 	void setRealId(MsgId newId);
 	void incrementReplyToTopCounter();
 	void applyEffectWatchedOnUnreadKnown();

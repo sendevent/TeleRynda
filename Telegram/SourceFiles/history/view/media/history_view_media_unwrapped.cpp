@@ -22,8 +22,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/painter.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/features/message_shot/message_shot.h"
+// TeleRynda includes
+#include "rynda/features/message_shot/message_shot.h"
 
 
 namespace HistoryView {
@@ -251,7 +251,7 @@ void UnwrappedMedia::drawSurrounding(
 	const auto rightActionSize = _parent->rightActionSize();
 	const auto fullRight = calculateFullRight(inner);
 	auto fullBottom = height();
-	if (needInfoDisplay() && !AyuFeatures::MessageShot::ignoreRender(AyuFeatures::MessageShot::RenderPart::Date)) {
+	if (needInfoDisplay() && !RyndaFeatures::MessageShot::ignoreRender(RyndaFeatures::MessageShot::RenderPart::Date)) {
 		_parent->drawInfo(
 			p,
 			context,
@@ -343,7 +343,7 @@ void UnwrappedMedia::drawSurrounding(
 			replyRight = rectx + rectw;
 		}
 	}
-	if (rightActionSize && !AyuFeatures::MessageShot::isTakingShot()) {
+	if (rightActionSize && !RyndaFeatures::MessageShot::isTakingShot()) {
 		const auto position = calculateFastActionPosition(
 			inner,
 			rightAligned,

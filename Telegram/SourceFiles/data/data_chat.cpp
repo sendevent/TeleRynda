@@ -64,8 +64,8 @@ ChatAdminRightsInfo ChatData::defaultAdminRights(not_null<UserData*> user) {
 		| (isCreator ? Flag::AddAdmins : Flag(0)));
 }
 
-bool ChatData::isAyuNoForwards() const {
-	return flags() & Flag::AyuNoForwards;
+bool ChatData::isRyndaNoForwards() const {
+	return flags() & Flag::RyndaNoForwards;
 }
 
 bool ChatData::allowsForwarding() const {

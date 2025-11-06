@@ -59,8 +59,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "chat_helpers/spellchecker_common.h"
 #endif // TDESKTOP_DISABLE_SPELLCHECK
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 #include "api/api_blocked_peers.h"
 
 
@@ -323,7 +323,7 @@ rpl::producer<> Session::downloaderTaskFinished() const {
 }
 
 bool Session::premium() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.localPremium) {
 		return true;
 	}
@@ -332,7 +332,7 @@ bool Session::premium() const {
 }
 
 bool Session::premiumPossible() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.localPremium) {
 		return true;
 	}
@@ -355,7 +355,7 @@ rpl::producer<bool> Session::premiumPossibleValue() const {
 		return _user->isPremium();
 	});
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.localPremium) {
 		premium = rpl::single(true);
 	}

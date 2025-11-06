@@ -51,8 +51,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace {
@@ -1202,7 +1202,7 @@ void LanguageBox::setupTop(not_null<Ui::VerticalLayout*> container) {
 	using namespace rpl::mappers;
 	auto premium = Data::AmPremiumValue(&_controller->session()) | rpl::map([=](bool val)
 	{
-		// const auto &settings = AyuSettings::getInstance();
+		// const auto &settings = RyndaSettings::getInstance();
 		// if (settings.translationProvider != "telegram") {
 		// 	return true;
 		// }

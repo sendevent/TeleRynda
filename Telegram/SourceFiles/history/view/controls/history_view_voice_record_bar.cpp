@@ -52,8 +52,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <tgcalls/VideoCaptureInterface.h>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 #include "boxes/abstract_box.h"
 
 
@@ -2188,8 +2188,8 @@ void VoiceRecordBar::stopRecording(StopType type, bool ttlBeforeHide) {
 					: 0),
 			};
 
-			const auto &settings = AyuSettings::getInstance();
-			if (AyuSettings::isUseScheduledMessages()) {
+			const auto &settings = RyndaSettings::getInstance();
+			if (RyndaSettings::isUseScheduledMessages()) {
 				auto current = base::unixtime::now();
 				options.scheduled = current + 12 + 5;
 			}
@@ -2209,7 +2209,7 @@ void VoiceRecordBar::stopRecording(StopType type, bool ttlBeforeHide) {
 			if (settings.voiceConfirmation) {
 				_show->showBox(Ui::MakeConfirmBox(
 					{
-						.text = tr::ayu_ConfirmationVoice(),
+						.text = tr::rynda_ConfirmationVoice(),
 						.confirmed = std::move(sendVoiceCallback),
 						.confirmText = tr::lng_send_button()
 					}));
@@ -2280,8 +2280,8 @@ void VoiceRecordBar::requestToSendWithOptions(Api::SendOptions options) {
 			options.ttlSeconds = std::numeric_limits<int>::max();
 		}
 
-		const auto &settings = AyuSettings::getInstance();
-		if (AyuSettings::isUseScheduledMessages()) {
+		const auto &settings = RyndaSettings::getInstance();
+		if (RyndaSettings::isUseScheduledMessages()) {
 			auto current = base::unixtime::now();
 			options.scheduled = current + 12 + 5;
 		}
@@ -2302,7 +2302,7 @@ void VoiceRecordBar::requestToSendWithOptions(Api::SendOptions options) {
 		if (settings.voiceConfirmation) {
 			_show->showBox(Ui::MakeConfirmBox(
 				{
-					.text = tr::ayu_ConfirmationVoice(),
+					.text = tr::rynda_ConfirmationVoice(),
 					.confirmed = std::move(sendVoiceCallback),
 					.confirmText = tr::lng_send_button()
 				}));

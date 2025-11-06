@@ -310,7 +310,7 @@ private:
 	QPointer<Ui::RoundButton> _send;
 	QPointer<Ui::RoundButton> _addFile;
 
-	// AyuGram files reordering
+	// TeleRynda files reordering
 
 	[[nodiscard]] bool isFileBlock(int i) const;
 	void moveFile(int from, int to);

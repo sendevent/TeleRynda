@@ -71,11 +71,11 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "platform/platform_notifications_manager.h"
 #include "spellcheck/spellcheck_highlight_syntax.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/ayu_state.h"
-#include "ayu/features/message_shot/message_shot.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/rynda_state.h"
+#include "rynda/features/message_shot/message_shot.h"
+#include "rynda/utils/telegram_helpers.h"
 
 
 namespace {
@@ -273,7 +273,7 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
 		});
 	}, [&](const MTPDmessageMediaPhoto &media) -> Result {
 		const auto photo = media.vphoto();
-		if (false) {  // AyuGram: show expiring messages
+		if (false) {  // TeleRynda: show expiring messages
 			LOG(("App Error: "
 				"Unexpected MTPMessageMediaPhoto "
 				"with ttl_seconds in CreateMedia."));
@@ -294,7 +294,7 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
 		});
 	}, [&](const MTPDmessageMediaDocument &media) -> Result {
 		const auto document = media.vdocument();
-		if (false) {  // AyuGram: show expiring messages
+		if (false) {  // TeleRynda: show expiring messages
 			LOG(("App Error: "
 				"Unexpected MTPMessageMediaDocument "
 				"with ttl_seconds in CreateMedia."));
@@ -455,7 +455,7 @@ HistoryItem::HistoryItem(
 						}
 
 						const auto time = media.vttl_seconds()->v;
-						setAyuHint(formatTTL(time));
+						setRyndaHint(formatTTL(time));
 						_unsupportedTTL = time;
 					},
 					[&](const MTPDmessageMediaDocument &media)
@@ -466,7 +466,7 @@ HistoryItem::HistoryItem(
 						}
 
 						const auto time = media.vttl_seconds()->v;
-						setAyuHint(formatTTL(time));
+						setRyndaHint(formatTTL(time));
 						_unsupportedTTL = time;
 					},
 					[&](const MTPDmessageMediaWebPage &media)
@@ -1912,8 +1912,8 @@ bool HistoryItem::isSponsored() const {
 	return _flags & MessageFlag::Sponsored;
 }
 
-bool HistoryItem::isAyuNoForwards() const {
-	return _flags & MessageFlag::AyuNoForwards;
+bool HistoryItem::isRyndaNoForwards() const {
+	return _flags & MessageFlag::RyndaNoForwards;
 }
 
 bool HistoryItem::canLookupMessageAuthor() const {
@@ -2370,7 +2370,7 @@ void HistoryItem::clearMediaAsExpired() {
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.saveDeletedMessages) {
 		return;
 	}
@@ -3081,11 +3081,11 @@ void HistoryItem::updateReactionsUnknown() {
 
 const std::vector<Data::MessageReaction> &HistoryItem::reactions() const {
 	static const auto kEmpty = std::vector<Data::MessageReaction>();
-	return _reactions && !AyuFeatures::MessageShot::ignoreRender(AyuFeatures::MessageShot::RenderPart::Reactions) ? _reactions->list() : kEmpty;
+	return _reactions && !RyndaFeatures::MessageShot::ignoreRender(RyndaFeatures::MessageShot::RenderPart::Reactions) ? _reactions->list() : kEmpty;
 }
 
 std::vector<Data::MessageReaction> HistoryItem::reactionsWithLocal() const {
-	if (!_reactions || AyuFeatures::MessageShot::ignoreRender(AyuFeatures::MessageShot::RenderPart::Reactions)) {
+	if (!_reactions || RyndaFeatures::MessageShot::ignoreRender(RyndaFeatures::MessageShot::RenderPart::Reactions)) {
 		return {};
 	}
 	auto result = _reactions->list();
@@ -3435,8 +3435,8 @@ void HistoryItem::setDeleted() {
 	_deleted = true;
 
 	if (isService()) {
-		const auto &settings = AyuSettings::getInstance();
-		setAyuHint(settings.deletedMark);
+		const auto &settings = RyndaSettings::getInstance();
+		setRyndaHint(settings.deletedMark);
 	} else {
 		history()->owner().requestItemViewRefresh(this);
 		history()->owner().requestItemResize(this);
@@ -3447,7 +3447,7 @@ bool HistoryItem::isDeleted() const {
 	return _deleted;
 }
 
-void HistoryItem::setAyuHint(const QString &hint) {
+void HistoryItem::setRyndaHint(const QString &hint) {
 	try {
 		auto msgsigned = Get<HistoryMessageSigned>();
 		if (hint.isEmpty()) {
@@ -3492,7 +3492,7 @@ void HistoryItem::setAyuHint(const QString &hint) {
 		history()->owner().requestItemViewRefresh(this);
 		history()->owner().requestItemResize(this);
 	} catch (...) {
-		DEBUG_LOG(("AyuGram: crash in setting hint"));
+		DEBUG_LOG(("TeleRynda: crash in setting hint"));
 	}
 }
 

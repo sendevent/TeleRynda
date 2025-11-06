@@ -66,10 +66,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QClipboard>
 #include <QtSvg/QSvgRenderer>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
-#include "styles/style_ayu_styles.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
+#include "styles/style_rynda_styles.h"
 #include "window/window_session_controller.h"
 #include "data/data_user.h"
 
@@ -764,14 +764,14 @@ void StickerSetBox::updateButtons() {
 		const auto addPackIdActions = [=](const std::shared_ptr<base::unique_qptr<Ui::PopupMenu>> &menu)
 		{
 			if (type == Data::StickersType::Stickers || type == Data::StickersType::Emoji) {
-				const auto &settings = AyuSettings::getInstance();
+				const auto &settings = RyndaSettings::getInstance();
 				const auto weak = base::make_weak(this);
 				const auto session = _session;
 				const auto setId = _inner->setId();
 				const auto innerId = setId >> 32;
 
 				(*menu)->addAction(
-					tr::ayu_MessageDetailsPackOwnerPC(tr::now),
+					tr::rynda_MessageDetailsPackOwnerPC(tr::now),
 					[weak, session, innerId]
 					{
 						if (!weak) {
@@ -799,7 +799,7 @@ void StickerSetBox::updateButtons() {
 
 								if (!user) {
 									QGuiApplication::clipboard()->setText(QString::number(innerId));
-									strongInner->showToast(tr::ayu_IDCopiedToast(tr::now));
+									strongInner->showToast(tr::rynda_IDCopiedToast(tr::now));
 									return;
 								}
 
@@ -814,7 +814,7 @@ void StickerSetBox::updateButtons() {
 
 				if (settings.showPeerId != 0) {
 					(*menu)->addAction(
-						tr::ayu_ContextCopyID(tr::now),
+						tr::rynda_ContextCopyID(tr::now),
 						[weak, setId]
 						{
 							if (!weak) {
@@ -827,7 +827,7 @@ void StickerSetBox::updateButtons() {
 							}
 
 							QGuiApplication::clipboard()->setText(QString::number(setId));
-							strongInner->showToast(tr::ayu_IDCopiedToast(tr::now));
+							strongInner->showToast(tr::rynda_IDCopiedToast(tr::now));
 						},
 						&st::menuIconCopy);
 				}
@@ -1444,7 +1444,7 @@ void StickerSetBox::Inner::chosen(
 		? Ui::MessageSendingAnimationFrom()
 		: messageSentAnimationInfo(index, sticker);
 
-	if (AyuSettings::isUseScheduledMessages() && !options.scheduled) {
+	if (RyndaSettings::isUseScheduledMessages() && !options.scheduled) {
 		auto current = base::unixtime::now();
 		options.scheduled = current + 12;
 	}
@@ -1502,9 +1502,9 @@ void StickerSetBox::Inner::contextMenuEvent(QContextMenuEvent *e) {
 				}
 			}, &st::menuIconCopy);
 
-			const auto &settings = AyuSettings::getInstance();
+			const auto &settings = RyndaSettings::getInstance();
 			if (settings.showPeerId != 0) {
-				_menu->addAction(tr::ayu_ContextCopyID(tr::now),
+				_menu->addAction(tr::rynda_ContextCopyID(tr::now),
 								 [=]
 								 {
 									 QGuiApplication::clipboard()->setText(QString::number(_pack[index]->id));

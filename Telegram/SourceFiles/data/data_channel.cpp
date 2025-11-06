@@ -704,8 +704,8 @@ bool ChannelData::canAddAdmins() const {
 	return amCreator() || (adminRights() & AdminRight::AddAdmins);
 }
 
-bool ChannelData::isAyuNoForwards() const {
-	return flags() & Flag::AyuNoForwards;
+bool ChannelData::isRyndaNoForwards() const {
+	return flags() & Flag::RyndaNoForwards;
 }
 
 bool ChannelData::allowsForwarding() const {

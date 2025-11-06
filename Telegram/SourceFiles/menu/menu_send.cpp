@@ -59,8 +59,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace SendMenu {
@@ -695,9 +695,9 @@ FillMenuResult FillSendMenu(
 		: st::defaultComposeIcons;
 
 	if (sending && type != Type::Reminder) {
-		const auto &settings = AyuSettings::getInstance();
+		const auto &settings = RyndaSettings::getInstance();
 		menu->addAction(
-			settings.sendWithoutSound ? tr::ayu_SendWithSound(tr::now) : tr::lng_send_silent_message(tr::now),
+			settings.sendWithoutSound ? tr::rynda_SendWithSound(tr::now) : tr::lng_send_silent_message(tr::now),
 			[=] { action({ Api::SendOptions{ .silent = true } }, details); },
 			settings.sendWithoutSound ? &icons.menuUnmute : &icons.menuMute);
 	}

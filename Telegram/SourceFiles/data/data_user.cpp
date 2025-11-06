@@ -39,9 +39,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "window/notifications_manager.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
 
 
 namespace {
@@ -564,7 +564,7 @@ bool UserData::isFake() const {
 
 bool UserData::isPremium() const {
 	if (id) {
-		const auto &settings = AyuSettings::getInstance();
+		const auto &settings = RyndaSettings::getInstance();
 		if (settings.localPremium) {
 			if (getSession(id.value)) {
 				return true;

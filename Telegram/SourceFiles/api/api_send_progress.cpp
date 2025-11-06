@@ -15,8 +15,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "data/data_peer_values.h"
 #include "apiwrap.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Api {
@@ -117,11 +117,11 @@ void SendProgressManager::send(const Key &key, int progress) {
 		return;
 	}
 
-	// AyuGram sendUploadProgress
-	const auto &settings = AyuSettings::getInstance();
+	// TeleRynda sendUploadProgress
+	const auto &settings = RyndaSettings::getInstance();
 	if (!settings.sendUploadProgress)
 	{
-		DEBUG_LOG(("[AyuGram] Don't send upload progress"));
+		DEBUG_LOG(("[TeleRynda] Don't send upload progress"));
 		return;
 	}
 

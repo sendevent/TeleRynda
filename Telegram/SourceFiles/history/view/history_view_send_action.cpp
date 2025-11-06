@@ -20,9 +20,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/painter.h"
 #include "styles/style_dialogs.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/filters/shadow_ban_utils.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/filters/shadow_ban_utils.h"
 
 namespace HistoryView {
 namespace {
@@ -67,7 +67,7 @@ bool SendActionPainter::updateNeedsAnimating(
 		return false;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.hideFromBlocked) {
 		if (user->isBlocked()) {
 			return false;

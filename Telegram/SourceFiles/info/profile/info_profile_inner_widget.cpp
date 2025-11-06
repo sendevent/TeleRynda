@@ -36,8 +36,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/ui_utility.h"
 #include "styles/style_info.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Info {
@@ -145,7 +145,7 @@ object_ptr<Ui::RpWidget> InnerWidget::setupSharedMedia(
 	using namespace rpl::mappers;
 	using MediaType = Media::Type;
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	auto content = object_ptr<Ui::VerticalLayout>(parent);
 	auto tracker = Ui::MultiSlideTracker();

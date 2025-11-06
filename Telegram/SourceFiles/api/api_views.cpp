@@ -15,8 +15,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "history/history_item.h"
 #include "main/main_session.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Api {
@@ -87,7 +87,7 @@ void ViewsManager::pollExtendedMedia(
 }
 
 void ViewsManager::viewsIncrement() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	for (auto i = _toIncrement.begin(); i != _toIncrement.cend();) {
 		if (_incrementRequests.contains(i->first)) {

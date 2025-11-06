@@ -11,14 +11,14 @@ add_library(tdesktop::td_ui ALIAS td_ui)
 include(lib_ui/cmake/generate_styles.cmake)
 include(cmake/generate_numbers.cmake)
 
-set(ayugram_style_files
-        ayu/ui/ayu_icons.style
-        ayu/ui/ayu_styles.style
-        ayu/ui/settings/ayu_settings.style
+set(telerynda_style_files
+        rynda/ui/rynda_icons.style
+        rynda/ui/rynda_styles.style
+        rynda/ui/settings/rynda_settings.style
 )
 
 set(style_files
-    ${ayugram_style_files}
+    ${telerynda_style_files}
 
     ui/td_common.style
     ui/filter_icons.style

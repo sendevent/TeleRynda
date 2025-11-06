@@ -1,0 +1,25 @@
+// This is the source code of TeleRynda for Desktop.
+//
+// We do not and cannot prevent the use of our code,
+// but be respectful and credit the original author.
+//
+// Copyright @Radolyn, 2025
+#pragma once
+
+#include "rynda/features/message_shot/message_shot.h"
+#include "ui/layers/box_content.h"
+
+class MessageShotBox : public Ui::BoxContent
+{
+public:
+	MessageShotBox(QWidget *parent, RyndaFeatures::MessageShot::ShotConfig config);
+
+protected:
+	void prepare() override;
+
+private:
+	void setupContent();
+
+	RyndaFeatures::MessageShot::ShotConfig _config;
+	std::shared_ptr<style::palette> _selectedPalette;
+};

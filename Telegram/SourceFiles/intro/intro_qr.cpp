@@ -29,7 +29,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "qr/qr_generate.h"
 #include "styles/style_intro.h"
 
-// AyuGram includes
+// TeleRynda includes
 #include "main/main_domain.h"
 
 

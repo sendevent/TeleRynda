@@ -1599,13 +1599,13 @@ void PeerData::processTopics(const MTPVector<MTPForumTopic> &topics) {
 	}
 }
 
-bool PeerData::isAyuNoForwards() const {
+bool PeerData::isRyndaNoForwards() const {
 	if (asUser()) {
 		return false;
 	} else if (const auto channel = asChannel()) {
-		return channel->isAyuNoForwards();
+		return channel->isRyndaNoForwards();
 	} else if (const auto chat = asChat()) {
-		return chat->isAyuNoForwards();
+		return chat->isRyndaNoForwards();
 	}
 	return true;
 }

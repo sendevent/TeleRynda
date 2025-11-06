@@ -19,8 +19,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "history/history.h"
 #include "main/main_session.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Data {
@@ -115,7 +115,7 @@ void PromoSuggestions::refreshTopPromotion() {
 					|= _dismissedSuggestions.emplace(qs(suggestion)).second;
 			}
 
-			const auto &settings = AyuSettings::getInstance();
+			const auto &settings = RyndaSettings::getInstance();
 			if (settings.disableAds) {
 				setTopPromoted(nullptr, QString(), QString());
 				return;

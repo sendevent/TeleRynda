@@ -33,8 +33,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "window/window_session_controller.h"
 #include "mainwindow.h"
 
-// AyuGram includes
-#include "ayu/ayu_url_handlers.h"
+// TeleRynda includes
+#include "rynda/rynda_url_handlers.h"
 
 
 namespace Core {
@@ -298,7 +298,7 @@ bool UiIntegration::handleUrlClick(
 		}
 	}
 
-	if (AyuUrlHandlers::TryHandleSpotify(url)) {
+	if (RyndaUrlHandlers::TryHandleSpotify(url)) {
 		return true;
 	}
 

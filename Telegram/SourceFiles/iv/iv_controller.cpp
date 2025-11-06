@@ -52,8 +52,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <ada.h>
 
-// AyuGram includes
-#include "ayu/features/streamer_mode/streamer_mode.h"
+// TeleRynda includes
+#include "rynda/features/streamer_mode/streamer_mode.h"
 
 
 namespace Iv {
@@ -650,8 +650,8 @@ void Controller::createWebview(const Webview::StorageId &storageId) {
 
 	const auto window = _window.get();
 
-	if (AyuFeatures::StreamerMode::isEnabled()) {
-		AyuFeatures::StreamerMode::hideWidgetWindow(window);
+	if (RyndaFeatures::StreamerMode::isEnabled()) {
+		RyndaFeatures::StreamerMode::hideWidgetWindow(window);
 	}
 
 	_webview = std::make_unique<Webview::Window>(

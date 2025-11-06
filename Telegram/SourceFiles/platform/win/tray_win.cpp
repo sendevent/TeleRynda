@@ -28,10 +28,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QSvgRenderer>
 #include <QBuffer>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/ui/ayu_logo.h"
-#include "styles/style_ayu_icons.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/ui/rynda_logo.h"
+#include "styles/style_rynda_icons.h"
 
 
 namespace Platform {
@@ -133,16 +133,16 @@ bool DarkTasbarValueValid/* = false*/;
 	static auto ScaledLogoDark = base::flat_map<int, QImage>();
 	static auto ScaledLogoLight = base::flat_map<int, QImage>();
 
-	static auto lastUsedIcon = AyuAssets::currentAppLogoName();
+	static auto lastUsedIcon = RyndaAssets::currentAppLogoName();
 
-	if (lastUsedIcon != AyuAssets::currentAppLogoName()) {
+	if (lastUsedIcon != RyndaAssets::currentAppLogoName()) {
 		ScaledLogo = base::flat_map<int, QImage>();
 		ScaledLogoNoMargin = base::flat_map<int, QImage>();
 		ScaledLogoDark = base::flat_map<int, QImage>();
 		ScaledLogoLight = base::flat_map<int, QImage>();
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.hideNotificationBadge) {
 		args.count = 0;
 	}
@@ -182,7 +182,7 @@ bool DarkTasbarValueValid/* = false*/;
 		return Window::WithSmallCounter(std::move(result), std::move(args));
 	}
 	QPainter p(&result);
-	PainterHighQualityEnabler hq(p); // AyuGram: fix for lq icons
+	PainterHighQualityEnabler hq(p); // TeleRynda: fix for lq icons
 	const auto half = args.size / 2;
 	args.size = half;
 	p.drawPixmap(

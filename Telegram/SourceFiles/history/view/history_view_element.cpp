@@ -54,11 +54,11 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "lang/lang_keys.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/message_shot/message_shot.h"
-#include "ayu/utils/telegram_helpers.h"
-#include "styles/style_ayu_styles.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/message_shot/message_shot.h"
+#include "rynda/utils/telegram_helpers.h"
+#include "styles/style_rynda_styles.h"
 
 
 namespace HistoryView {
@@ -373,7 +373,7 @@ void UnreadBar::paint(
 		int y,
 		int w,
 		ElementChatMode mode) const {
-	if (AyuFeatures::MessageShot::isTakingShot()) {
+	if (RyndaFeatures::MessageShot::isTakingShot()) {
 		return;
 	}
 	const auto previousTranslation = p.transform().dx();
@@ -1055,7 +1055,7 @@ bool Element::isTopicRootReply() const {
 }
 
 int Element::skipBlockWidth() const {
-	if (AyuFeatures::MessageShot::ignoreRender(AyuFeatures::MessageShot::RenderPart::Date)) {
+	if (RyndaFeatures::MessageShot::ignoreRender(RyndaFeatures::MessageShot::RenderPart::Date)) {
 		return st::msgDateDelta.x();
 	}
 
@@ -1636,7 +1636,7 @@ void Element::destroyUnreadBar() {
 }
 
 int Element::displayedDateHeight() const {
-	if (AyuFeatures::MessageShot::isTakingShot() || isMessageHidden(data())) {
+	if (RyndaFeatures::MessageShot::isTakingShot() || isMessageHidden(data())) {
 		return 0;
 	}
 

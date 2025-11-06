@@ -63,10 +63,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
-#include "ayu/features/forward/ayu_forward.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
+#include "rynda/features/forward/rynda_forward.h"
 
 
 class ShareBox::Inner final : public Ui::RpWidget {
@@ -1745,7 +1745,7 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 		const auto requestType = Data::Histories::RequestType::Send;
 
 
-		// AyuGram-changed
+		// TeleRynda-changed
 		const auto dismiss = [=]
 		{
 			if (show->valid()) {
@@ -1754,10 +1754,10 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 		};
 
 
-		if (AyuForward::isFullAyuForwardNeeded(items.front())) {
+		if (RyndaForward::isFullRyndaForwardNeeded(items.front())) {
 			crl::async([=]{
 				for (const auto thread : result) {
-					AyuForward::forwardMessages(
+					RyndaForward::forwardMessages(
 					&history->owner().session(),
 					Api::SendAction(thread, options),
 					false,
@@ -1768,11 +1768,11 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 			dismiss();
 			return;
 		}
-		if (AyuForward::isAyuForwardNeeded(items)) {
+		if (RyndaForward::isRyndaForwardNeeded(items)) {
 			crl::async([=]
 			{
 				for (const auto thread : result) {
-					AyuForward::intelligentForward(
+					RyndaForward::intelligentForward(
 						&history->owner().session(),
 						Api::SendAction(thread, options),
 						Data::ResolvedForwardDraft(items, forwardOptions));
@@ -1782,7 +1782,7 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 			dismiss();
 			return;
 		}
-		// AyuGram-changed
+		// TeleRynda-changed
 
 
 		for (const auto thread : result) {
@@ -1861,7 +1861,7 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 						}
 					}
 
-					const auto &settings = AyuSettings::getInstance();
+					const auto &settings = RyndaSettings::getInstance();
 					if (!settings.sendReadMessages && settings.markReadAfterAction && history->lastMessage())
 					{
 						readHistory(history->lastMessage());

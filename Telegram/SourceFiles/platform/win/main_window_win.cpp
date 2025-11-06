@@ -47,8 +47,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <Windowsx.h>
 #include <VersionHelpers.h>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 // Taken from qtbase/src/gui/image/qpixmap_win.cpp
@@ -602,7 +602,7 @@ void MainWindow::unreadCounterChangedHook() {
 }
 
 void MainWindow::updateTaskbarAndIconCounters() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto counter = settings.hideNotificationBadge ? 0 : Core::App().unreadBadge();
 	const auto muted = settings.hideNotificationBadge ? 0 : Core::App().unreadBadgeMuted();

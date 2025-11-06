@@ -47,8 +47,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 #include "ui/boxes/confirm_box.h"
 #include "boxes/abstract_box.h"
 #include "base/unixtime.h"
@@ -502,8 +502,8 @@ void GifsListWidget::selectInlineResult(
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
-	if (AyuSettings::isUseScheduledMessages()) {
+	const auto &settings = RyndaSettings::getInstance();
+	if (RyndaSettings::isUseScheduledMessages()) {
 		auto current = base::unixtime::now();
 		options.scheduled = current + 12;
 	}
@@ -554,7 +554,7 @@ void GifsListWidget::selectInlineResult(
 
 			if (settings.gifConfirmation) {
 				Ui::show(Ui::MakeConfirmBox({
-					.text = tr::ayu_ConfirmationGIF(),
+					.text = tr::rynda_ConfirmationGIF(),
 					.confirmed = sendGIFCallback,
 					.confirmText = tr::lng_send_button()
 				}));

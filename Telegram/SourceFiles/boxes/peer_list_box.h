@@ -85,11 +85,11 @@ public:
 
 		return _peer;
 	}
-	// AyuGram
+	// TeleRynda
 	void setPeer(not_null<PeerData*> peer) {
 		_peer = peer;
 	}
-	// AyuGram
+	// TeleRynda
 
 	[[nodiscard]] PeerListRowId id() const {
 		return _id;

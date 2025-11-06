@@ -83,10 +83,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QClipboard>
 #include <QtGui/QWindow>
 
-// AyuGram includes
-#include "ayu/ui/settings/settings_main.h"
-#include "ayu/ui/utils/ayu_profile_values.h"
-#include "ayu/utils/telegram_helpers.h"
+// TeleRynda includes
+#include "rynda/ui/settings/settings_main.h"
+#include "rynda/ui/utils/rynda_profile_values.h"
+#include "rynda/utils/telegram_helpers.h"
 
 namespace Settings {
 namespace {
@@ -173,14 +173,14 @@ Cover::Cover(
 	_name->setContextCopyText(tr::lng_profile_copy_fullname(tr::now));
 
 	_id->setSelectable(true);
-	_id->setContextCopyText(tr::ayu_ContextCopyID(tr::now));
+	_id->setContextCopyText(tr::rynda_ContextCopyID(tr::now));
 	const auto hook = [=](Ui::FlatLabel::ContextMenuRequest request) {
 		if (request.selection.empty()) {
 			const auto c = [=] {
 				auto id = IDString(_user);
 				TextUtilities::SetClipboardText({ id });
 			};
-			request.menu->addAction(tr::ayu_ContextCopyID(tr::now), c);
+			request.menu->addAction(tr::rynda_ContextCopyID(tr::now), c);
 		} else {
 			_id->fillContextMenu(request);
 		}
@@ -660,8 +660,8 @@ void SetupSections(
 
 	Ui::AddSkip(container);
 	addSection(
-		tr::ayu_AyuPreferences(),
-		AyuMain::Id(),
+		tr::rynda_RyndaPreferences(),
+		RyndaMain::Id(),
         { .icon = &st::menuIconPremium });
 	Ui::AddSkip(container);
 	Ui::AddDivider(container);

@@ -1,0 +1,60 @@
+/*
+ * This is the source code of TeleRynda for Desktop.
+ *
+ * We do not and cannot prevent the use of our code,
+ * but be respectful and credit the original author.
+ *
+ * Copyright @Radolyn, 2025
+ */
+
+using "ui/colors.palette";
+using "ui/widgets/widgets.style";
+using "dialogs/dialogs.style";
+
+ryndaGhostIcon: icon {{ "rynda/ghost", menuIconColor }};
+ryndaMenuIcon: icon {{ "rynda/rynda_menu", menuIconColor }};
+ryndaEditsHistoryIcon: icon {{ "rynda/edits_history", menuIconColor }};
+ryndaLReadMenuIcon: icon {{ "rynda/lread", menuIconColor }};
+ryndaSReadMenuIcon: icon {{ "rynda/sread", menuIconColor }};
+ryndaStreamerModeMenuIcon: icon {{ "rynda/streamer", menuIconColor }};
+
+ryndaMenuIconToBeginning: icon {{ "rynda/to_beginning", menuIconColor }};
+
+messageFieldAttachIcon: icon {{ "rynda/message_field/attach", menuIconColor }};
+messageFieldCommandsIcon: icon {{ "rynda/message_field/commands", menuIconColor }};
+messageFieldEmojiIcon: icon {{ "rynda/message_field/emoji", menuIconColor }};
+messageFieldVoiceIcon: icon {{ "rynda/message_field/voice", menuIconColor }};
+messageFieldTTLIcon: icon {{ "rynda/message_field/ttl", menuIconColor }};
+
+inChannelBadgeIcon: icon {{ "rynda/channel", msgInDateFg }};
+inChannelBadgeSelectedIcon: icon {{ "rynda/channel", msgInDateFgSelected }};
+outChannelBadgeIcon: icon {{ "rynda/channel", msgOutDateFg }};
+outChannelBadgeSelectedIcon: icon {{ "rynda/channel", msgOutDateFgSelected }};
+
+infoExteraOfficialBadge: icon {{ "rynda/extera_official", profileVerifiedCheckBg }};
+infoExteraSupporterBadge: icon {{ "rynda/extera_badge", profileVerifiedCheckBg }};
+
+winEnterWithGuestIcon: icon {{ "rynda/ghost_tray", windowFg }};
+
+editedIcon: IconEmoji{
+    icon: icon{{ "rynda/edited", windowFg }};
+    padding: margins(0px, 0px, 0px, 0px);
+    useIconColor: false;
+}
+
+deletedIcon: IconEmoji{
+    icon: icon{{ "rynda/trash_bin", windowFg }};
+    padding: margins(0px, 0px, 0px, 0px);
+    useIconColor: false;
+}
+
+dialogsExteraOfficialIcon: ThreeStateIcon {
+	icon: icon {{ "rynda/dialogs_extera_official", dialogsVerifiedIconBg }};
+	over: icon {{ "rynda/dialogs_extera_official", dialogsVerifiedIconBgOver }};
+	active: icon {{ "rynda/dialogs_extera_official", dialogsVerifiedIconBgActive }};
+}
+dialogsExteraSupporterIcon: ThreeStateIcon {
+	icon: icon {{ "rynda/dialogs_extera_supporter", dialogsVerifiedIconBg }};
+	over: icon {{ "rynda/dialogs_extera_supporter", dialogsVerifiedIconBgOver }};
+	active: icon {{ "rynda/dialogs_extera_supporter", dialogsVerifiedIconBgActive }};
+}

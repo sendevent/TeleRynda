@@ -66,8 +66,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "apiwrap.h"
 #include "ui/text/format_values.h" // Ui::FormatPhone
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Api {
@@ -998,8 +998,8 @@ void Updates::updateOnline(crl::time lastNonIdleTime, bool gotOtherOffline) {
 		Core::App().checkAutoLock(lastNonIdleTime);
 	});
 
-	// AyuGram sendOnlinePackets
-	const auto &settings = AyuSettings::getInstance();
+	// TeleRynda sendOnlinePackets
+	const auto &settings = RyndaSettings::getInstance();
 	const auto& config = _session->serverConfig();
 	bool isOnlineOrig = Core::App().hasActiveWindow(&session());
 	bool isOnline = settings.sendOnlinePackets && isOnlineOrig;

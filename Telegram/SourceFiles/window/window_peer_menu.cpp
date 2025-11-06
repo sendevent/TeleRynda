@@ -119,10 +119,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QAction>
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "styles/style_ayu_icons.h"
-#include "ayu/ui/context_menu/context_menu.h"
-#include "ayu/features/forward/ayu_forward.h"
+// TeleRynda includes
+#include "styles/style_rynda_icons.h"
+#include "rynda/ui/context_menu/context_menu.h"
+#include "rynda/features/forward/rynda_forward.h"
 
 namespace Window {
 namespace {
@@ -1531,7 +1531,7 @@ void Filler::fillContextMenuActions() {
 		}
 	}
 	addClearHistory();
-	AyuUi::AddDeleteOwnMessagesAction(_peer, _topic, _controller, _addAction);
+	RyndaUi::AddDeleteOwnMessagesAction(_peer, _topic, _controller, _addAction);
 	addDeleteChat();
 	addLeaveChat();
 	addDeleteTopic();
@@ -1541,8 +1541,8 @@ void Filler::fillHistoryActions() {
 	addToggleMuteSubmenu(true);
 	addCreateTopic();
 	addInfo();
-	AyuUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
-	AyuUi::AddOpenChannelAction(_peer, _controller, _addAction);
+	RyndaUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
+	RyndaUi::AddOpenChannelAction(_peer, _controller, _addAction);
 	addViewAsTopics();
 	addManageChat();
 	addStoryArchive();
@@ -1556,9 +1556,9 @@ void Filler::fillHistoryActions() {
 	addExportChat();
 	addTranslate();
 	addReport();
-	AyuUi::AddDeletedMessagesActions(_peer, _thread, _controller, _addAction);
+	RyndaUi::AddDeletedMessagesActions(_peer, _thread, _controller, _addAction);
 	addClearHistory();
-	AyuUi::AddDeleteOwnMessagesAction(_peer, _topic, _controller, _addAction);
+	RyndaUi::AddDeleteOwnMessagesAction(_peer, _topic, _controller, _addAction);
 	addDeleteChat();
 	addLeaveChat();
 }
@@ -1578,8 +1578,8 @@ void Filler::fillProfileActions() {
 	addTopicLink();
 	addManageTopic();
 	addToggleTopicClosed();
-	AyuUi::AddOpenChannelAction(_peer, _controller, _addAction);
-	AyuUi::AddShadowBanAction(_peer, _addAction);
+	RyndaUi::AddOpenChannelAction(_peer, _controller, _addAction);
+	RyndaUi::AddShadowBanAction(_peer, _addAction);
 	addViewDiscussion();
 	addDirectMessages();
 	addExportChat();
@@ -1594,7 +1594,7 @@ void Filler::fillProfileActions() {
 void Filler::fillRepliesActions() {
 	if (_topic) {
 		addInfo();
-		AyuUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
+		RyndaUi::AddJumpToBeginningAction(_peer, _thread, _controller, _addAction);
 		addManageTopic();
 	}
 	addBoostChat();
@@ -1602,7 +1602,7 @@ void Filler::fillRepliesActions() {
 	addCreateTodoList();
 	addToggleTopicClosed();
 	addDeleteTopic();
-	AyuUi::AddDeletedMessagesActions(_peer, _thread, _controller, _addAction);
+	RyndaUi::AddDeletedMessagesActions(_peer, _thread, _controller, _addAction);
 }
 
 void Filler::fillScheduledActions() {
@@ -2962,16 +2962,16 @@ base::weak_qptr<Ui::BoxContent> ShowForwardMessagesBox(
 			options,
 			state->box->forwardOptionsData());
 
-		// AyuGram-changed
+		// TeleRynda-changed
 
-		// workaround for deselecting messages when using AyuForward
+		// workaround for deselecting messages when using RyndaForward
 		const auto items = history->owner().idsToItems(msgIds);
-		auto ayuForwarding = AyuForward::isAyuForwardNeeded(items) || AyuForward::isFullAyuForwardNeeded(items.front());
+		auto ryndaForwarding = RyndaForward::isRyndaForwardNeeded(items) || RyndaForward::isFullRyndaForwardNeeded(items.front());
 
-		if ((!state->submit || ayuForwarding) && successCallback) {
+		if ((!state->submit || ryndaForwarding) && successCallback) {
 			successCallback();
 		}
-		// AyuGram-changed
+		// TeleRynda-changed
 	};
 
 	const auto sendMenuType = [=] {

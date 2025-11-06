@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=TeleRynda Desktop
+Comment=Desktop version of TeleRynda - ToS breaking Telegram client
+TryExec=$HOME/.local/bin/TeleRynda
+Exec=env DESKTOPINTEGRATION=1 $HOME/.local/bin/TeleRynda -- %u
+Icon=com.telerynda.desktop
+Terminal=false
+StartupWMClass=TeleRyndaDesktop
+Type=Application
+Categories=Chat;Network;InstantMessaging;Qt;
+MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+Keywords=tg;chat;im;messaging;messenger;sms;telegram;tdesktop;
+Actions=quit;
+DBusActivatable=true
+SingleMainWindow=true
+X-GNOME-UsesNotifications=true
+X-GNOME-SingleWindow=true
+
+[Desktop Action quit]
+Exec=$HOME/.local/bin/TeleRynda -quit
+Name=Quit TeleRynda
+Icon=application-exit
+

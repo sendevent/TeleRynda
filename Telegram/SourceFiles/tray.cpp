@@ -15,9 +15,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/features/streamer_mode/streamer_mode.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/features/streamer_mode/streamer_mode.h"
 #include "lang_auto.h"
 
 
@@ -80,7 +80,7 @@ void Tray::rebuildMenu() {
 			_activeForTrayIconAction = Core::App().isActiveForTrayMenu();
 			return _activeForTrayIconAction
 				? tr::lng_minimize_to_tray(tr::now)
-				: tr::lng_open_from_tray(tr::now).replace("Telegram", "AyuGram");
+				: tr::lng_open_from_tray(tr::now).replace("Telegram", "TeleRynda");
 		});
 
 		_tray.addAction(
@@ -101,28 +101,28 @@ void Tray::rebuildMenu() {
 			[=] { toggleSoundNotifications(); });
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	if (settings.showGhostToggleInTray) {
 		auto turnGhostModeText = _textUpdates.events(
 		) | rpl::map(
 			[=]
 			{
-				bool ghostModeEnabled = AyuSettings::isGhostModeActive();
+				bool ghostModeEnabled = RyndaSettings::isGhostModeActive();
 
 				return ghostModeEnabled
-						   ? tr::ayu_DisableGhostModeTray(tr::now)
-						   : tr::ayu_EnableGhostModeTray(tr::now);
+						   ? tr::rynda_DisableGhostModeTray(tr::now)
+						   : tr::rynda_EnableGhostModeTray(tr::now);
 			});
 		_tray.addAction(
 			std::move(turnGhostModeText),
 			[=]
 			{
-				bool ghostMode = AyuSettings::isGhostModeActive();
+				bool ghostMode = RyndaSettings::isGhostModeActive();
 
-				AyuSettings::set_ghostModeEnabled(!ghostMode);
+				RyndaSettings::set_ghostModeEnabled(!ghostMode);
 
-				AyuSettings::save();
+				RyndaSettings::save();
 			});
 	}
 
@@ -131,20 +131,20 @@ void Tray::rebuildMenu() {
 		) | rpl::map(
 			[=]
 			{
-				bool streamerModeEnabled = AyuFeatures::StreamerMode::isEnabled();
+				bool streamerModeEnabled = RyndaFeatures::StreamerMode::isEnabled();
 
 				return streamerModeEnabled
-						   ? tr::ayu_DisableStreamerModeTray(tr::now)
-						   : tr::ayu_EnableStreamerModeTray(tr::now);
+						   ? tr::rynda_DisableStreamerModeTray(tr::now)
+						   : tr::rynda_EnableStreamerModeTray(tr::now);
 			});
 		_tray.addAction(
 			std::move(turnStreamerModeText),
 			[=]
 			{
-				if (AyuFeatures::StreamerMode::isEnabled()) {
-					AyuFeatures::StreamerMode::disable();
+				if (RyndaFeatures::StreamerMode::isEnabled()) {
+					RyndaFeatures::StreamerMode::disable();
 				} else {
-					AyuFeatures::StreamerMode::enable();
+					RyndaFeatures::StreamerMode::enable();
 				}
 			});
 	}
@@ -152,7 +152,7 @@ void Tray::rebuildMenu() {
 	auto quitText = _textUpdates.events(
 	) | rpl::map([=]
 	{
-		return tr::lng_quit_from_tray(tr::now).replace("Telegram", "AyuGram");
+		return tr::lng_quit_from_tray(tr::now).replace("Telegram", "TeleRynda");
 	});
 	_tray.addAction(std::move(quitText), [] { Core::Quit(); });
 

@@ -362,7 +362,7 @@ enum class MessageFlag : uint64 {
 
 	HasHiddenLinks        = (1ULL << 56),
 
-	AyuNoForwards         = (1ULL << 63),
+	RyndaNoForwards         = (1ULL << 63),
 };
 inline constexpr bool is_flag_type(MessageFlag) { return true; }
 using MessageFlags = base::flags<MessageFlag>;

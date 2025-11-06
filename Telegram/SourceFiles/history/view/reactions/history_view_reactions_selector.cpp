@@ -40,9 +40,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_chat_helpers.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/ui/context_menu/context_menu.h"
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/ui/context_menu/context_menu.h"
+#include "rynda/rynda_settings.h"
 
 
 namespace HistoryView::Reactions {
@@ -847,7 +847,7 @@ void Selector::finishExpand() {
 }
 
 void Selector::paintBubble(QPainter &p, int innerWidth) {
-	// AyuGram: removed
+	// TeleRynda: removed
 }
 
 void Selector::paintEvent(QPaintEvent *e) {
@@ -1378,8 +1378,8 @@ AttachSelectorResult AttachSelectorToMenu(
 		Fn<void(ChosenReaction)> chosen,
 		TextWithEntities about,
 		IconFactory iconFactory) {
-	const auto &settings = AyuSettings::getInstance();
-	if (!AyuUi::needToShowItem(settings.showReactionsPanelInContextMenu)) {
+	const auto &settings = RyndaSettings::getInstance();
+	if (!RyndaUi::needToShowItem(settings.showReactionsPanelInContextMenu)) {
 		return AttachSelectorResult::Skipped;
 	}
 
@@ -1436,8 +1436,8 @@ auto AttachSelectorToMenu(
 	IconFactory iconFactory,
 	Fn<bool()> paused)
 -> base::expected<not_null<Selector*>, AttachSelectorResult> {
-	const auto &settings = AyuSettings::getInstance();
-	if (!AyuUi::needToShowItem(settings.showReactionsPanelInContextMenu)) {
+	const auto &settings = RyndaSettings::getInstance();
+	if (!RyndaUi::needToShowItem(settings.showReactionsPanelInContextMenu)) {
 		return base::make_unexpected(AttachSelectorResult::Skipped);
 	}
 

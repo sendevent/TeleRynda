@@ -25,8 +25,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "main/main_app_config.h"
 #include "apiwrap.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Data {
@@ -487,8 +487,8 @@ void ChatFilters::requestToggleTags(bool value, Fn<void()> fail) {
 }
 
 void ChatFilters::received(const QVector<MTPDialogFilter> &list) {
-	// AyuGram hideAllChatsFolder
-	const auto &settings = AyuSettings::getInstance();
+	// TeleRynda hideAllChatsFolder
+	const auto &settings = RyndaSettings::getInstance();
 
 	auto position = 0;
 	auto changed = false;
@@ -529,8 +529,8 @@ void ChatFilters::received(const QVector<MTPDialogFilter> &list) {
 }
 
 void ChatFilters::apply(const MTPUpdate &update) {
-	// AyuGram hideAllChatsFolder
-	const auto &settings = AyuSettings::getInstance();
+	// TeleRynda hideAllChatsFolder
+	const auto &settings = RyndaSettings::getInstance();
 
 	update.match([&](const MTPDupdateDialogFilter &data) {
 		if (const auto filter = data.vfilter()) {
@@ -913,10 +913,10 @@ FilterId ChatFilters::defaultId() const {
 FilterId ChatFilters::lookupId(int index) const {
 	// Expects(index >= 0 && index < _list.size());
 	if (!(index >= 0 && index < _list.size())) {
-		return FilterId(); // AyuGram: fix crash when using `hideAllChatsFolder`
+		return FilterId(); // TeleRynda: fix crash when using `hideAllChatsFolder`
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	if (_owner->session().user()->isPremium() || !_list.front().id() || settings.hideAllChatsFolder) {
 		return _list[index].id();

@@ -32,8 +32,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/unixtime.h"
 #include "styles/style_dialogs.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Dialogs {
@@ -556,7 +556,7 @@ void Row::paintUserpic(
 		updateCornerBadgeShown(peer, nullptr, hasUnreadBadgesAbove);
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto cornerBadgeShown = !_cornerBadgeUserpic
 		? _cornerBadgeShown

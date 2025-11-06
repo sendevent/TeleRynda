@@ -1,0 +1,23 @@
+﻿// This is the source code of TeleRynda for Desktop.
+//
+// We do not and cannot prevent the use of our code,
+// but be respectful and credit the original author.
+//
+// Copyright @Radolyn, 2025
+#pragma once
+
+#include "entities.h"
+
+#include "history/history_item_edition.h"
+
+namespace RyndaMessages {
+
+void addEditedMessage(not_null<HistoryItem *> item);
+std::vector<RyndaMessageBase> getEditedMessages(not_null<HistoryItem*> item, ID minId, ID maxId, int totalLimit);
+bool hasRevisions(not_null<HistoryItem*> item);
+
+void addDeletedMessage(not_null<HistoryItem*> item);
+std::vector<RyndaMessageBase> getDeletedMessages(not_null<PeerData*> peer, ID topicId, ID minId, ID maxId, int totalLimit);
+bool hasDeletedMessages(not_null<PeerData*> peer, ID topicId);
+
+}

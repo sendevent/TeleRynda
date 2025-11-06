@@ -90,8 +90,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
-#include "styles/style_ayu_icons.h"
+// TeleRynda includes
+#include "styles/style_rynda_icons.h"
 
 
 namespace Dialogs {

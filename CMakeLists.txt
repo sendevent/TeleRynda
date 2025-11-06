@@ -15,8 +15,8 @@ desktop_app_parse_version(Telegram/build/version)
 project(Telegram
     LANGUAGES C CXX
     VERSION ${desktop_app_version_cmake}
-    DESCRIPTION "AyuGram Desktop"
-    HOMEPAGE_URL "https://ayugram.one"
+    DESCRIPTION "TeleRynda Desktop"
+    HOMEPAGE_URL ""
 )
 
 if (APPLE)

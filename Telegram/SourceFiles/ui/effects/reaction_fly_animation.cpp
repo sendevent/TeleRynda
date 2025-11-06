@@ -17,8 +17,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/random.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/utils/taptic_engine/taptic_engine.h"
+// TeleRynda includes
+#include "rynda/utils/taptic_engine/taptic_engine.h"
 
 
 namespace Ui {

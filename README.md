@@ -1,6 +1,6 @@
-# AyuGram
+# TeleRynda
 
-![AyuGram Logo](.github/AyuGram.png) ![AyuChan](.github/AyuChan.png)
+![TeleRynda Logo](.github/AyuGram.png) ![AyuChan](.github/AyuChan.png)
 
 [ English  |   [Русский](README-RU.md) ]
 
@@ -24,7 +24,7 @@ And many more. Check out our [Documentation](https://docs.ayugram.one/desktop/).
     <table>
       <tr>
         <td><img src='.github/demos/demo1.png' width='268' alt='Preferences'></td>
-        <td><img src='.github/demos/demo2.png' width='268' alt='AyuGram Options'></td>
+        <td><img src='.github/demos/demo2.png' width='268' alt='TeleRynda Options'></td>
         <td><img src='.github/demos/demo3.png' width='268' alt='Message Filters'></td>
       </tr>
       <tr>
@@ -41,68 +41,68 @@ And many more. Check out our [Documentation](https://docs.ayugram.one/desktop/).
 
 #### Official
 
-You can download prebuilt Windows binary from [Releases tab](https://github.com/AyuGram/AyuGramDesktop/releases) or from
-the [Telegram channel](https://t.me/AyuGramReleases).
+You can download prebuilt Windows binary from [Releases tab](https://github.com/TeleRynda/TeleRyndaDesktop/releases) or from
+the [Telegram channel](https://t.me/TeleRyndaReleases).
 
 #### Winget
 
 ```bash
-winget install RadolynLabs.AyuGramDesktop
+winget install RadolynLabs.TeleRyndaDesktop
 ```
 
 #### Scoop
 
 ```bash
 scoop bucket add extras
-scoop install ayugram
+scoop install telerynda
 ```
 
 #### Self-built
 
-Follow [official guide](https://github.com/AyuGram/AyuGramDesktop/blob/dev/docs/building-win-x64.md) if you want to
+Follow [official guide](https://github.com/TeleRynda/TeleRyndaDesktop/blob/dev/docs/building-win-x64.md) if you want to
 build by yourself.
 
 ### macOS
 
 #### Official
 
-You can download prebuilt macOS package from [Releases tab](https://github.com/AyuGram/AyuGramDesktop/releases).
+You can download prebuilt macOS package from [Releases tab](https://github.com/TeleRynda/TeleRyndaDesktop/releases).
 
 #### Homebrew
 
 ```bash
-brew install --cask ayugram
+brew install --cask telerynda
 ```
 
 ### Arch Linux
 
 #### From source (recommended)
 
-Install `ayugram-desktop` from [AUR](https://aur.archlinux.org/packages/ayugram-desktop).
+Install `telerynda-desktop` from [AUR](https://aur.archlinux.org/packages/telerynda-desktop).
 
 #### Prebuilt binaries
 
-Install `ayugram-desktop-bin` from [AUR](https://aur.archlinux.org/packages/ayugram-desktop-bin).
+Install `telerynda-desktop-bin` from [AUR](https://aur.archlinux.org/packages/telerynda-desktop-bin).
 
 Note: these binaries aren't officially maintained by us.
 
 ### NixOS
 
-See [this repository](https://github.com/ayugram-port/ayugram-desktop) for installation manual.
+See [this repository](https://github.com/telerynda-port/telerynda-desktop) for installation manual.
 
 ### ALT Linux
 
-[Sisyphus](https://packages.altlinux.org/en/sisyphus/srpms/ayugram-desktop/)
+[Sisyphus](https://packages.altlinux.org/en/sisyphus/srpms/telerynda-desktop/)
 
 ### EPM
 
-`epm play ayugram`
+`epm play telerynda`
 
 ### Any other Linux distro
 
-Flatpak: https://github.com/0FL01/AyuGramDesktop-flatpak
+Flatpak: https://github.com/0FL01/TeleRyndaDesktop-flatpak
 
-Or follow the [official guide](https://github.com/AyuGram/AyuGramDesktop/blob/dev/docs/building-linux.md).
+Or follow the [official guide](https://github.com/TeleRynda/TeleRyndaDesktop/blob/dev/docs/building-linux.md).
 
 ### Remarks for Windows
 
@@ -114,7 +114,7 @@ Make sure you have these components installed with VS Build Tools:
 
 ## Donation
 
-Enjoy using **AyuGram**? Consider sending us a tip!
+Enjoy using **TeleRynda**? Consider sending us a tip!
 
 [Here's available methods.](https://docs.ayugram.one/donate/)
 

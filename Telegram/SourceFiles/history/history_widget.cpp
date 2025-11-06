@@ -190,12 +190,12 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QWindow>
 #include <QtCore/QMimeData>
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
-#include "ayu/utils/telegram_helpers.h"
-#include "ayu/features/message_shot/message_shot.h"
-#include "ayu/features/forward/ayu_forward.h"
-#include "ayu/ui/boxes/message_shot_box.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
+#include "rynda/utils/telegram_helpers.h"
+#include "rynda/features/message_shot/message_shot.h"
+#include "rynda/features/forward/rynda_forward.h"
+#include "rynda/ui/boxes/message_shot_box.h"
 #include "boxes/abstract_box.h"
 
 
@@ -291,7 +291,7 @@ HistoryWidget::HistoryWidget(
 	tr::lng_channel_mute(tr::now).toUpper(),
 	st::historyComposeButton)
 , _discuss(this,
-	tr::ayu_ChannelBottomButtonDiscuss(tr::now).toUpper(),
+	tr::rynda_ChannelBottomButtonDiscuss(tr::now).toUpper(),
 	st::historyComposeButton)
 , _reportMessages(this, QString(), st::historyComposeButton)
 , _attachToggle(this, st::historyAttach)
@@ -520,7 +520,7 @@ HistoryWidget::HistoryWidget(
 
 	_fieldCharsCountManager.limitExceeds(
 	) | rpl::start_with_next([=] {
-		const auto &settings = AyuSettings::getInstance();
+		const auto &settings = RyndaSettings::getInstance();
 		const auto hide = _fieldCharsCountManager.isLimitExceeded();
 		if (_silent) {
 			_silent->setVisible(!hide);
@@ -665,7 +665,7 @@ HistoryWidget::HistoryWidget(
 		session().changes().peerUpdates(
 			Data::PeerUpdate::Flag::IsBlocked
 		) | rpl::to_empty,
-		AyuSettings::get_filtersUpdate()
+		RyndaSettings::get_filtersUpdate()
 	) | rpl::start_with_next(
 		[=]
 		{
@@ -797,7 +797,7 @@ HistoryWidget::HistoryWidget(
 		}
 	}, lifetime());
 
-	AyuSettings::get_historyUpdateReactive() | rpl::start_with_next([=]
+	RyndaSettings::get_historyUpdateReactive() | rpl::start_with_next([=]
 	{
 		refreshAttachBotsMenu();
 		updateHistoryGeometry();
@@ -1088,7 +1088,7 @@ HistoryWidget::HistoryWidget(
 		if (action.replaceMediaOf) {
 		} else if (action.options.scheduled) {
 			cancelReplyOrSuggest(lastKeyboardUsed);
-			if (!AyuSettings::isUseScheduledMessages()) {
+			if (!RyndaSettings::isUseScheduledMessages()) {
 				crl::on_main(this, [=, history = action.history]
 				{
 					controller->showSection(
@@ -1174,7 +1174,7 @@ void HistoryWidget::refreshGiftToChannelShown() {
 	if (!_giftToChannel || !_peer) {
 		return;
 	}
-	// AyuGram: hide gift button almost everywhere
+	// TeleRynda: hide gift button almost everywhere
 	// still accessible via the menu in peer window
 	const auto channel = _peer->asChannel();
 	_giftToChannel->setVisible(channel
@@ -2067,7 +2067,7 @@ void HistoryWidget::fileChosen(ChatHelpers::FileChosen &&data) {
 			Data::InsertCustomEmoji(_field.data(), data.document);
 		}
 	} else if (_history) {
-		const auto &settings = AyuSettings::getInstance();
+		const auto &settings = RyndaSettings::getInstance();
 		if (!settings.sendReadMessages && settings.markReadAfterAction) {
 			if (const auto lastMessage = history()->lastMessage()) {
 				readHistory(lastMessage);
@@ -2963,7 +2963,7 @@ void HistoryWidget::setHistory(History *history) {
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto was = _attachBotsMenu && _history && _history->peer->isUser();
 	const auto now = _attachBotsMenu && history && history->peer->isUser() && settings.showAttachPopup;
@@ -3053,7 +3053,7 @@ void HistoryWidget::refreshAttachBotsMenu() {
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	_attachBotsMenu = InlineBots::MakeAttachBotsMenu(
 		this,
@@ -3428,7 +3428,7 @@ bool HistoryWidget::canWriteMessage() const {
 }
 
 void HistoryWidget::updateControlsVisibility() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	auto fieldDisabledRemoved = (_fieldDisabled != nullptr);
 	const auto hideExtraButtons = _fieldCharsCountManager.isLimitExceeded();
@@ -3986,7 +3986,7 @@ void HistoryWidget::messagesReceived(
 		int requestId) {
 	// Expects(_history != nullptr);
 	if (!_history || !_peer) {
-		return; // AyuGram: fix crash when using `saveDeletedMessages`
+		return; // TeleRynda: fix crash when using `saveDeletedMessages`
 	}
 
 	const auto toMigrated = (peer == _peer->migrateFrom());
@@ -4848,8 +4848,8 @@ void HistoryWidget::sendVoice(const VoiceToSend &data) {
 }
 
 void HistoryWidget::send(Api::SendOptions options) {
-	const auto &settings = AyuSettings::getInstance();
-	if (AyuSettings::isUseScheduledMessages() && !options.scheduled) {
+	const auto &settings = RyndaSettings::getInstance();
+	if (RyndaSettings::isUseScheduledMessages() && !options.scheduled) {
 		auto current = base::unixtime::now();
 		options.scheduled = current + 12;
 	}
@@ -5059,7 +5059,7 @@ void HistoryWidget::goToDiscussionGroup() {
 }
 
 bool HistoryWidget::hasDiscussionGroup() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.channelBottomButton != 2) {
 		return false;
 	}
@@ -5672,7 +5672,7 @@ bool HistoryWidget::isChoosingTheme() const {
 }
 
 bool HistoryWidget::isMuteUnmute() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.channelBottomButton == 0) {
 		return false;
 	}
@@ -5689,7 +5689,7 @@ bool HistoryWidget::isSearching() const {
 }
 
 bool HistoryWidget::showRecordButton() const {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (!settings.showMicrophoneButtonInMessageField) {
 		return false;
 	}
@@ -5931,7 +5931,7 @@ void HistoryWidget::showKeyboardHideButton() {
 }
 
 void HistoryWidget::toggleKeyboard(bool manual) {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto fieldEnabled = canWriteMessage() && !_showAnimation;
 	if (_kbShown || _kbReplyTo) {
@@ -6156,7 +6156,7 @@ bool HistoryWidget::fieldOrDisabledShown() const {
 }
 
 void HistoryWidget::moveFieldControls() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	auto keyboardHeight = 0;
 	auto bottom = height();
@@ -6261,7 +6261,7 @@ void HistoryWidget::moveFieldControls() {
 }
 
 void HistoryWidget::updateFieldSize() {
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto kbShowShown = _history && !_kbShown && _keyboard->hasMarkup();
 	auto fieldWidth = width()
@@ -7086,8 +7086,8 @@ void HistoryWidget::updateSendRestriction() {
 		return;
 	}
 	_sendRestrictionKey = restriction.text;
-	if (AyuForward::isForwarding(_peer->id)) {
-		_sendRestriction = AyuForwardWriteRestriction(this, _peer->id, session());
+	if (RyndaForward::isForwarding(_peer->id)) {
+		_sendRestriction = RyndaForwardWriteRestriction(this, _peer->id, session());
 	} else if (!restriction) {
 		_sendRestriction = nullptr;
 	} else if (restriction.frozen) {
@@ -7451,7 +7451,7 @@ void HistoryWidget::updateBotKeyboard(History *h, bool force) {
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 
 	const auto wasVisible = _kbShown || _kbReplyTo;
 	const auto wasMsgId = _keyboard->forMsgId();
@@ -9373,7 +9373,7 @@ void HistoryWidget::messageShotSelected() {
 		})
 		| ranges::to_vector;
 
-	const AyuFeatures::MessageShot::ShotConfig config = {
+	const RyndaFeatures::MessageShot::ShotConfig config = {
 		controller(),
 		std::make_shared<Ui::ChatStyle>(controller()->chatStyle()),
 		messages

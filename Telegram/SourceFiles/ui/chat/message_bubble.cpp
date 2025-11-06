@@ -12,8 +12,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/chat/chat_style.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
-#include "ayu/ayu_settings.h"
+// TeleRynda includes
+#include "rynda/rynda_settings.h"
 
 
 namespace Ui {
@@ -46,7 +46,7 @@ void PaintBubbleGeneric(
 		return;
 	}
 
-	const auto &settings = AyuSettings::getInstance();
+	const auto &settings = RyndaSettings::getInstance();
 	if (settings.removeMessageTail) {
 		if (bottomWithTailLeft == Corner::Tail) {
 			bottomWithTailLeft = Corner::Large;
