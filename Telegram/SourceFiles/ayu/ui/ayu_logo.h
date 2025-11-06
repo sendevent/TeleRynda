@@ -10,18 +10,10 @@
 
 namespace AyuAssets {
 
-ICON(DEFAULT, "default");
-ICON(ALT, "alt");
-ICON(DISCORD, "discord");
-ICON(SPOTIFY, "spotify");
-ICON(EXTERA, "extera");
-ICON(NOTHING, "nothing");
-ICON(BARD, "bard");
-ICON(YAPLUS, "yaplus");
-ICON(WIN95, "win95");
-ICON(CHIBI, "chibi");
-ICON(CHIBI2, "chibi2");
-ICON(EXTERA2, "extera2");
+// Define your two custom icons here
+// The string in quotes is the folder name in Resources/art/ayu/
+ICON(APP_WHITE, "app_white");
+ICON(APP_BLACK, "app_black");
 
 void loadAppIco();
 
